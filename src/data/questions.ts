@@ -13,9 +13,25 @@ export const questions: Question[] = [
     question: "Explain OSI reference model and its layers",
     answer: {
       definition: "The Open Systems Interconnection (OSI) model is a conceptual framework that standardizes the functions of a communication system into seven distinct abstraction layers.",
-      explanation: "The OSI model consists of seven layers: Physical, Data Link, Network, Transport, Session, Presentation, and Application. The Physical layer handles bitstream transmission over physical media. The Data Link layer ensures error-free transfer of frames. The Network layer manages logical addressing and packet routing. The Transport layer provides end-to-end reliability and flow control. The Session layer manages dialogues between applications. The Presentation layer handles encryption, compression, and data translation. The Application layer serves as the user interface for network services. Each layer interacts with the layers above and below it, facilitating a modular and interoperable design. This separation of concerns allows for easier troubleshooting and the development of new protocols without disrupting the entire system architecture.",
-      diagramExplanation: "A vertical stack of seven layers. Data flows down (encapsulation) at the sender and up (decapsulation) at the receiver.",
-      example: "TCP/IP layers mapping to OSI layers during a web request.",
+      explanation: [
+        "Origin: The OSI model was established by the International Organization for Standardization (ISO) in 1984 to facilitate global communication and interoperability between diverse vendors.",
+        "Abstract Architecture: It provides a highly structured 7-layer architecture where each layer addresses a specific aspect of the computer-to-computer data exchange process.",
+        "Modularity: By breaking down the complex networking process, it allows for targeted troubleshooting, modularity in protocol design, and a clear understanding of data flow.",
+        "Layer Dependency: Each layer performs its own set of functions and relies on the services provided by the layer immediately below it while offering its own services to the layer above.",
+        "Vertical Isolation: This vertical hierarchy is crucial for maintaining abstraction; for example, the Application layer doesn't need to know whether the Physical layer is using copper or light to transmit bits.",
+        "Standard Blueprint: This model remains the gold standard for theoretical networking education and serves as a vital blueprint for building scalable, multi-vendor enterprise networks consistently."
+      ],
+      detailedPoints: [
+        "Physical Layer (Layer 1): Deals with the physical characteristics of the transmission medium and the raw bitstream transmission. It defines voltages, pin layouts, and cable specifications.",
+        "Data Link Layer (Layer 2): Responsible for node-to-node data transfer. It packages bits into frames, handles physical addressing (MAC addresses), and manages error control and flow control.",
+        "Network Layer (Layer 3): Manages packet routing across the network. It uses logical addressing (IP addresses) and determines the best path for data using advanced routing algorithms.",
+        "Transport Layer (Layer 4): Provides end-to-end communication services. It handles segmentation, reassembly, error correction, and flow control (TCP and UDP function here).",
+        "Session Layer (Layer 5): Establishes, manages, and terminates dialogues between applications. It handles session checkpoints and recovery mechanisms.",
+        "Presentation Layer (Layer 6): Acts as the data translator. It handles data encryption, compression, and various character encoding formats (like ASCII or JPEG).",
+        "Application Layer (Layer 7): Provides network services directly to end-user applications. It includes protocols like HTTP, SMTP, and FTP that users interact with directly."
+      ],
+      diagramExplanation: "A vertical stack of seven layers. Data flows down (encapsulation) at the sender and up (decapsulation) at the receiver. Peers communicate logically.",
+      example: "When you browse a website, your request travels through your browser (Application) down to your network cable (Physical).",
       advantages: ["Standardization", "Troubleshooting clarity", "Interoperability", "Modular design"],
       disadvantages: ["High complexity", "High overhead", "Slow convergence"],
       applications: ["Protocol design", "Network education", "Inter-vendor testing"],
@@ -30,7 +46,24 @@ export const questions: Question[] = [
     question: "Explain TCP/IP model with diagram",
     answer: {
       definition: "The TCP/IP model is a concise four-layer suite of communication protocols used to interconnect network devices on the internet.",
-      explanation: "TCP/IP was developed for practical use and consists of four layers: Network Access, Internet, Transport, and Application. The Network Access layer combines physical and data link functions. The Internet layer (IP) handles host-to-host routing. The Transport layer (TCP/UDP) manages end-to-end reliability. The Application layer combines the session, presentation, and application layers of the OSI model. It is the dominant model for global networking due to its simplicity and effectiveness. Unlike the theoretical OSI model, TCP/IP is built around the specific protocols that power the web. It prioritizes data integrity and routing efficiency over strict theoretical layer separation. The model is designed to be hardware-agnostic, allowing diverse devices to communicate seamlessly over a shared network fabric using standardized addressing schemes.",
+      explanation: [
+        "Development: The TCP/IP model, also known as the DoD model, is a practical and flexible framework developed by DARPA.",
+        "Internet Focus: Unlike the 7-layer OSI model, TCP/IP focuses specifically on the protocols required for the global internet to function.",
+        "Pragmatic Design: It prioritizes reliability and efficient routing over strict theoretical separation of tasks.",
+        "Platform Independence: The model is designed to be hardware-independent, allowing computers across the globe to communicate regardless of their internal architecture.",
+        "Delivery Tiers: It operates using the principle of best-effort delivery at the lower layers, while the Transport layer (TCP) provides the necessary guarantees for mission-critical data.",
+        "Modern Standard: This model has become the undisputed standard for modern networking because it is lightweight, highly scalable, and perfectly optimized for the packet-switching nature of the internet.",
+        "Reduced Overhead: By consolidating tasks (like combining session and presentation into application), it reduces processing overhead and simplifies the implementation for software developers and systems engineers."
+      ],
+      detailedPoints: [
+        "Network Access Layer: Combines the Physical and Data Link layers of the OSI model. It handles the physical transmission of data between adjacent network nodes.",
+        "Internet Layer: Equivalent to the OSI Network layer. It uses the Internet Protocol (IP) for logical addressing and packet routing across different networks.",
+        "Transport Layer: Manages host-to-host communication. TCP provides reliable, connection-oriented data delivery, while UDP offers fast, connectionless data transfer.",
+        "Application Layer: Encompasses the Session, Presentation, and Application layers of OSI. It includes all high-level protocols like HTTP, DNS, and SSH that applications use.",
+        "Focus on Integration: The model is highly integrative, allowing seamless communication across diverse physical media like Ethernet, Fiber, and Satellite.",
+        "Hardware Independence: Since protocols are software-defined, the TCP/IP model allows any device (phone, server, IoT) to join the global web.",
+        "Global Standardization: Every device connected to the internet must implement some version of the TCP/IP stack, ensuring universal connectivity."
+      ],
       diagramExplanation: "A 4-layer stack: Link, Internet, Transport, Application. Maps OSI's 1-2 to Link, 3 to Internet, 4 to Transport, and 5-7 to Application.",
       example: "Sending an HTTP request over a TCP socket via an IP address.",
       advantages: ["High scalability", "Widely adopted", "Cross-platform", "Robust error recovery"],
@@ -47,9 +80,24 @@ export const questions: Question[] = [
     question: "Discuss network topologies with merits and demerits",
     answer: {
       definition: "Network topology is the physical or logical arrangement of nodes and links in a computer network, defining how devices are connected and how data flows.",
-      explanation: "Common topologies include Star, Bus, Ring, Mesh, and Tree. In a Star topology, all nodes connect to a central hub, offering easy management but a single point of failure. Bus topology uses a single backbone cable; it is cheap but fails if the cable breaks. Ring topology connects nodes in a closed loop, providing orderly data access. Mesh topology provides multiple connections for every node, offering the highest reliability but at a very high cabling cost. Tree topology is hierarchical, suitable for large organizational structures. Each topology has specific trade-offs between cost, installation difficulty, reliability, and scalability. Modern Local Area Networks (LANs) predominantly use Star or Hybrid topologies because high-speed switches minimize collisions and simplify network maintenance and expansion tasks.",
-      diagramExplanation: "Illustrative shapes: Point-to-point (Star), Single Line (Bus), Circle (Ring), and Web (Mesh).",
-      example: "A home WiFi network usually functions logically as a Star topology with the router at the center.",
+      explanation: [
+        "Design Significance: Choosing a network topology is one of the most critical decisions in network design, as it impacts performance, cabling costs, and the difficulty of future expansions.",
+        "Physical vs Logical: Physical topology focuses on the layout of cables and devices, while logical topology describes the actual path signals take through the physical wires.",
+        "Variety of Arrangements: Each arrangement has a unique 'personality': some are built for extreme reliability (Mesh), while others are built for simplicity and cost-savings (Bus).",
+        "Industry Standard: In modern enterprise environments, the Star topology has become the standard due to the reliability and intelligence of modern network switches.",
+        "Scalability Structures: For large-scale backbone networks, Mesh or Tree structures are preferred to provide the necessary redundancy and hierarchical organization.",
+        "Engineering Balance: Understanding the merits and demerits of each is essential for any engineer tasked with building a network that must survive hardware failures while remaining within a set budget and physical space."
+      ],
+      detailedPoints: [
+        "Star Topology: All devices connect to a central hub/switch. Pros: easy to install, one cable failure doesn't affect the rest. Cons: hub failure brings down the entire network.",
+        "Bus Topology: All nodes share a common single backbone cable. Pros: cheap and simple for small setups. Cons: a break in the main cable ends all communication.",
+        "Ring Topology: Every node connects to exactly two neighbors, forming a circle. Pros: handles heavy traffic well. Cons: one node failure can disrupt the whole network.",
+        "Mesh Topology: Every node has a direct connection to many other nodes. Pros: extreme redundancy and privacy. Cons: incredibly expensive and complex to cable.",
+        "Tree Topology: A hierarchical structure where star networks are connected through a central bus/root. Pros: highly scalable. Cons: depends on the root node.",
+        "Hybrid Topology: Combining two or more topologies (like Star-Ring) to leverage the advantages of each for specialized industrial or campus environments."
+      ],
+      diagramExplanation: "Illustrative shapes: Point-to-point (Star), Single Line (Bus), Circle (Ring), and Web (Mesh). Higher layer diagrams include hierarchical branching (Tree).",
+      example: "A typical office setup uses Star topology where every computer connects to a central server room switch.",
       advantages: ["Star: Easy troubleshooting", "Mesh: High redundancy", "Bus: Low installation cost", "Ring: Better traffic handling"],
       disadvantages: ["Star: Hub dependency", "Mesh: High complexity", "Bus: Cable length limits", "Ring: High latency"],
       applications: ["Office LANs", "Backbone networks", "Industrial loops"],
@@ -64,9 +112,26 @@ export const questions: Question[] = [
     question: "Explain transmission media (guided & unguided)",
     answer: {
       definition: "Transmission media refers to the physical path through which data signals travel from a source to a destination. It is divided into Guided (wired) and Unguided (wireless).",
-      explanation: "Guided media utilize a physical conductor to carry signals. This includes Twisted Pair cable (cheap, used in telephony), Coaxial cable (higher bandwidth, used in cable TV), and Fiber Optic cable (uses light pulses, offering highest speed and EMI immunity). Unguided media transmit data through air or vacuum using electromagnetic waves. This includes Radio waves (omni-directional), Microwaves (line-of-sight), and Infrared (short-range). Radio waves are ideal for mobile phones and broadcasting. Microwaves are used for point-to-point satellite communication. Infrared is used for household remotes and very short-range data exchange. The choice of medium depends on the required distance, bandwidth, environmental interference, and budget. While guided media offer more security and stability, unguided media provide the mobility and flexibility required for modern mobile and wide-area networking applications.",
+      explanation: [
+        "Selection Criteria: The selection of transmission media is a foundational step in network engineering, as it determines the maximum possible bandwidth and the distance data can travel before needing a repeater.",
+        "Security & Noise: It also dictates the level of security against eavesdropping and the susceptibility to environmental electromagnetic interference.",
+        "Guided Mechanism: Guided media use a physical conduit, such as copper or glass, to contain and direct the signal, providing higher security and reliability.",
+        "Signal Protection: This containment reduces the impact of external cross-talk and atmospheric conditions on the high-frequency signals.",
+        "Unguided Mobility: Unguided media use the electromagnetic spectrum to broadcast signals through the air, enabling incredible mobility and rapid deployment.",
+        "Geographical Flexibility: This is particularly useful in areas where physical infrastructure like trenches for cables is geographically or economically impossible.",
+        "Hybrid Approaches: Modern enterprise networks often use a hybrid approach: high-speed Fiber Optic backbones (Guided) and Wireless Access Points (Unguided) for users."
+      ],
+      detailedPoints: [
+        "Twisted Pair (Guided): Consists of two insulated copper wires twisted together. It is inexpensive and easy to install but has limited distance and bandwidth (Cat5, Cat6).",
+        "Coaxial Cable (Guided): Features a central conductor surrounded by an insulating layer and a metallic shield. It offers better shielding and higher bandwidth than twisted pair.",
+        "Fiber Optic (Guided): Uses pulses of light through ultra-thin glass strands. It provides the highest bandwidth, longest distances, and total immunity to electromagnetic interference.",
+        "Radio Waves (Unguided): Low-frequency waves that can penetrate buildings and travel long distances. Ideal for FM radio and television broadcasting.",
+        "Microwaves (Unguided): High-frequency waves that require line-of-sight transmission (unobstructed path). Used extensively for satellite and cellular communication.",
+        "Infrared (Unguided): Extremely high-frequency, short-range waves. They cannot penetrate walls, making them secure for short-range device communication like TV remotes.",
+        "Propagation Modes: Guided media use physical propagation, while unguided media use ground wave, sky wave, and line-of-sight propagation depending on frequency."
+      ],
       diagramExplanation: "A branching tree: Media -> Guided (Twisted, Coax, Fiber) and Unguided (Radio, Microwave, Infrared).",
-      example: "Ethernet cables in an office (Guided) vs a smartphone connecting to 5G (Unguided).",
+      example: "Connecting your computer to a router via an Ethernet cable (Guided) vs your laptop connecting via Wi-Fi (Unguided).",
       advantages: ["Fiber: Secure and fast", "Radio: High mobility", "Coax: Wide bandwidth", "Twisted: Affordable"],
       disadvantages: ["Fiber: Expensive", "Radio: High interference", "Microwave: Line-of-sight needed", "Twisted: Susceptible to noise"],
       applications: ["Backbone cables", "Satellite links", "Home WiFi", "CCTV systems"],
@@ -81,7 +146,15 @@ export const questions: Question[] = [
     question: "Compare OSI and TCP/IP models",
     answer: {
       definition: "OSI and TCP/IP are the two most widely referenced networking models, used to understand and implement communication protocols and architectures.",
-      explanation: "The OSI model consists of seven layers and was designed as a theoretical, vendor-neutral standard before protocols were developed. In contrast, TCP/IP has four layers and was developed based on existing protocols already used in the ARPANET. OSI clearly separates services, interfaces, and protocols, whereas TCP/IP does not. OSI's session and presentation layers are absorbed into the TCP/IP application layer. OSI's physical and data link layers are merged into TCP/IP's network access layer. Both models share a hierarchical layered approach and use a similar transport and network layer logic. However, TCP/IP is much more practical and is the actual standard used by the internet today. OSI is primarily used as an educational and diagnostic tool to understand the deep mechanics of data communication. The choice of model often depends on whether one is designing hardware (OSI focus) or software applications (TCP/IP focus).",
+      explanation: [
+        "Structural Difference: The OSI model is a 7-layer theoretical standard, while TCP/IP is a 4-layer practical protocol stack.",
+        "Design Intent: OSI was designed as a vendor-neutral standard before development, while TCP/IP followed existing protocols.",
+        "Abstraction vs Efficiency: OSI provides strict separation between services and interfaces; TCP/IP merges multiple functions for efficiency.",
+        "Layer Consolidation: The Session and Presentation layers of OSI are absorbed into the single Application layer in TCP/IP.",
+        "Educational vs Practical Use: OSI is primarily used as an educational and diagnostic tool for understanding network mechanics.",
+        "Deployment Standard: TCP/IP is the practical engine that powers the modern internet and all corporate enterprise networks.",
+        "Shared Logic: Both models use a hierarchical layered approach to facilitate modularity and global communication standards."
+      ],
       diagramExplanation: "A side-by-side comparison table or stack showing how layers match (Application/Presentation/Session -> Application; Transport -> Transport; Network -> Internet; Data Link/Physical -> Link).",
       example: "Analyzing a network failure using OSI layers vs implementing a web app using TCP/IP logic.",
       advantages: ["OSI: Architectural clarity", "TCP/IP: Practical and simple", "Both support modularity"],
@@ -98,7 +171,15 @@ export const questions: Question[] = [
     question: "Explain architecture of Internet",
     answer: {
       definition: "The architecture of the Internet is a hierarchical and decentralized structure of interconnected networks that facilitates global data exchange using the TCP/IP protocol suite.",
-      explanation: "The Internet is organized into three tiers of Internet Service Providers (ISPs). Tier-1 ISPs own the massive high-speed fiber-optic backbones that span continents and peer with each other to exchange traffic globally without cost. Tier-2 ISPs pay Tier-1 providers for access and serve regional or national populations. Tier-3 ISPs (Local ISPs) connect directly to end users, providing the 'last mile' connection using technologies like DSL, Fiber, or Cable. The architecture is decentralized, meaning there is no single point of failure or control. Routers at the edges of these networks use protocols like BGP (Border Gateway Protocol) to determine the most efficient paths for data. This design follows the end-to-end principle, where complex logic is handled by the hosts (computers), while the core network remains simple and focused on efficient packet delivery. This hierarchical yet distributed nature allows the Internet to scale to billions of devices while remaining highly resilient to isolated failures.",
+      explanation: [
+        "Global Connectivity: The Internet's architecture is built on a hierarchical and decentralized structure of interconnected networks managed by diverse entities.",
+        "Tier-1 Backbone: Tier-1 ISPs form the global backbone, owning high-speed fiber-optic links that span continents and peer without transit costs.",
+        "Tier-2 Regional: Tier-2 ISPs operate at regional or national levels, purchasing bandwidth from Tier-1 and selling it to smaller providers.",
+        "Tier-3 Last Mile: Tier-3 (Local) ISPs provide the 'last mile' connectivity directly to homes and businesses using technologies like DSL or Fiber.",
+        "Protocol Coordination: Data is routed across these tiers using the Border Gateway Protocol (BGP), which finds the most efficient external paths.",
+        "End-to-End Principle: The architecture adheres to the 'End-to-End' principle, where network intelligence stays at the hosts while the core focuses on speed.",
+        "System Resilience: This distributed design ensures that the global network remains resilient, scalable, and capable of surviving localized failures."
+      ],
       diagramExplanation: "A cloud-based hierarchy: Tier 1 (Backbone), Tier 2 (Regional), Tier 3 (Local), and End-Users.",
       example: "Accessing a server in London from India via a local ISP through multiple undersea fiber backbones.",
       advantages: ["Extreme scalability", "High resilience", "Decentralized control", "Global reaching"],
@@ -115,8 +196,25 @@ export const questions: Question[] = [
     question: "Explain wireless transmission principles",
     answer: {
       definition: "Wireless transmission is the transfer of information between points that are not connected by an electrical conductor, typically using electromagnetic waves through air or vacuum.",
-      explanation: "The principles of wireless transmission involve the modulation and propagation of electromagnetic signals. An antenna converts electrical currents into electromagnetic waves, which travel through space according to their frequency. High-frequency waves like Microwaves travel in a straight line (line-of-sight), while lower frequency waves like Radio waves can penetrate obstacles and follow the Earth's curvature. Modulation techniques like AM (Amplitude), FM (Frequency), and PM (Phase) are used to encode data onto these carrier waves. Modern wireless systems use more complex schemes like QAM (Quadrature Amplitude Modulation) to maximize data rates. Challenges in wireless transmission include signal attenuation (weakening over distance), absorption (by buildings or rain), and multipath fading (signals bouncing off surfaces). To combat this, techniques like MIMO (Multiple Input Multiple Output) and beamforming are used in 5G and modern WiFi. Security is also a critical concern, as signals are broadcast and can be intercepted, necessitating robust encryption protocols like WPA3.",
-      diagramExplanation: "Illustration of an antenna radiating waves, showing modulation peaks and troughs, and a receiver capturing the signal.",
+      explanation: [
+        "Scientific Basis: Wireless transmission is governed by the principles of electromagnetic radiation and specialized signal processing algorithms.",
+        "Data Encoding: Information is encoded onto an electromagnetic carrier wave through modulation techniques like Amplitude, Frequency, or Phase changes.",
+        "Shared Medium: The transmission medium—the atmosphere—is shared and inherently 'hostile' due to physical obstacles and competing electronic noise.",
+        "Wave Propagation: Signals propagate through different paths: ground waves for short distances, sky waves for long-range, and line-of-sight for high speeds.",
+        "Environmental Impact: Challenges like Multipath Fading occur when signals bounce off buildings and arrive at the receiver at slightly different times.",
+        "Spectral Innovation: Modern systems like 5G leverage higher frequency bands (Millimeter waves) and massive MIMO to overcome bandwidth limitations.",
+        "Targeted Delivery: Advance techniques like Beamforming allow signals to be focused directly at a user, increasing range and reducing wasted energy."
+      ],
+      detailedPoints: [
+        "Antenna Principles: Antennas convert electrical energy into electromagnetic waves. Sizes and shapes are tuned to specific frequencies (resonant length).",
+        "Modulation Techniques: AM (Amplitude), FM (Frequency), and PM (Phase) modulation encode data onto high-frequency carrier waves for efficient travel.",
+        "Spectrum Management: Since air is a shared medium, frequencies are strictly regulated by governments (like FCC) to prevent different services from interfering.",
+        "Signal Propagation: Waves travel via Ground waves (following curvature), Sky waves (bouncing off ionosphere), or Line-of-Sight (straight path).",
+        "Interference & Fading: Signals are weakened by physical obstacles, rain, and overlapping waves from other wireless devices (EMI).",
+        "MIMO Technology: Using multiple antennas at both sender and receiver to transmit multiple pieces of data simultaneously, significantly increasing capacity.",
+        "Beamforming: Focusing the wireless signal directly towards the receiver rather than broadcasting it in all directions, improving range and efficiency."
+      ],
+      diagramExplanation: "Illustration of an antenna radiating waves, showing modulation peaks and troughs, and a receiver capturing the signal. Shows line-of-sight vs multipath bounces.",
       example: "A 4G LTE smartphone communicating with a base station through QAM-modulated radio frequencies.",
       advantages: ["High mobility", "Low infrastructure cost", "Flexible deployment", "Easy scaling"],
       disadvantages: ["Susceptible to interference", "Limited security", "Bandwidth constraints"],
@@ -132,7 +230,15 @@ export const questions: Question[] = [
     question: "Explain layered architecture significance",
     answer: {
       definition: "Layered architecture in networking is a design principle where communication tasks are divided into distinct vertical layers with specific responsibilities and standardized interfaces.",
-      explanation: "The significance of layered architecture lies in its ability to simplify complex system designs and promote interoperability. By dividing the networking process into layers (like the OSI or TCP/IP models), developers can focus on specific functionalities without knowing the internal details of other layers. For example, a web developer doesn't need to know how fiber optic signals are modulated to build an application. This modularity means that a change in one layer (switching from Copper to Fiber) doesn't require rewriting the computer's software stack. Layering also facilitates standardized testing and debugging, as faults can be isolated to a specific layer. It allows for the co-existence of diverse hardware and software from different vendors, as they all adhere to the same interlayer communication standards. This structure enables massive innovation, as each layer can evolve independently, leading to the rapid advancement of speeds, security, and application features seen in modern networking.",
+      explanation: [
+        "System Simplification: Layered architecture simplifies complex system designs by dividing tasks into specialized vertical sections.",
+        "Modularity & Updates: It promotes 'Modularity', allowing specific layer functions to be updated without affecting the entire stack.",
+        "Vendor Neutrality: Standardized interfaces between layers ensure that hardware from different vendors can communicate seamlessly.",
+        "Complexity Abstraction: This design abstracts technical details; a web developer doesn't need to know the physics of fiber optics.",
+        "Precision Diagnostics: Layering facilitates precision troubleshooting, as network faults can be isolated to a single layer for analysis.",
+        "Independent Innovation: It encourages rapid innovation by allowing each protocol layer to evolve independently at its own pace.",
+        "Universal Compatibility: This architectural blueprint is the primary reason the internet can support billions of diverse, connected devices."
+      ],
       diagramExplanation: "A visual showing horizontal communication between peers and vertical service calls between adjacent layers.",
       example: "Updating a network card (Physical/Link) without needing to update the web browser (Application).",
       advantages: ["Modularity", "Simpler troubleshooting", "Ease of development", "Standardization"],
@@ -151,7 +257,14 @@ export const questions: Question[] = [
     question: "Packet switching concept",
     answer: {
       definition: "Packet switching is a communication method that divides data into small blocks called packets, which are individually routed through a network to their destination.",
-      explanation: "In packet switching, messages are broken down into packets, each containing a header with source and destination addresses. These packets travel independently and can take different paths based on network congestion or link failures. Upon arrival, the destination host reassembles them using sequence numbers. This method is highly efficient as multiple users can share the same network resources simultaneously. It eliminates the need for a dedicated physical path between sender and receiver, prioritizing bandwidth utilization over constant latency. It is the core technology that enables the modern internet.",
+      explanation: [
+        "Fragmentation: In packet switching, long messages are broken down into small, manageable blocks called 'packets'.",
+        "Header Components: Each packet contains a header with its unique source and destination address, as well as a sequence number.",
+        "Independent Pathing: Packets are routed independently through the network, meaning they can take different paths to reach the target.",
+        "Buffer Mechanism: Intermediate routers use 'Store-and-Forward' switching to buffer and verify each packet before sending it further.",
+        "Message Reassembly: Upon reaching the destination, the host reassembles the packets into the original message using their sequence info.",
+        "Bandwidth Multiplexing: This approach maximizes bandwidth efficiency as multiple users can share the same physical links simultaneously."
+      ],
       example: "TCP/IP communication across the internet, where emails or web pages are sent as independent packets.",
       keyPoints: ["Data fragmented into packets", "Dynamic routing paths", "Efficient bandwidth sharing", "Store-and-forward logic", "Supports multiple users", "Foundation of the Internet"]
     }
@@ -163,7 +276,14 @@ export const questions: Question[] = [
     question: "Circuit vs Packet switching",
     answer: {
       definition: "Circuit and Packet switching are two fundamental methods of routing data, differing in how they allocate network resources for transmission.",
-      explanation: "Circuit switching establishes a dedicated, constant-bitrate connection between two nodes for the entire communication session, similar to a traditional telephone call. It guarantees bandwidth and zero jitter but is inefficient if no data is being sent. Packet switching divides data into individual blocks that are routed independently. It uses statistical multiplexing to allow many users to share one link, offering much better efficiency for bursty data. While circuit switching was best for old voice networks, packet switching is the standard for almost all modern digital communication.",
+      explanation: [
+        "Dedicated Channel: Circuit switching establishes a dedicated, constant-bitrate physical connection between two nodes for the entire session.",
+        "Analog Heritage: This method guarantees reserved bandwidth and zero jitter, which was ideal for traditional analog voice telephone calls.",
+        "Resource Waste: The major downside is inefficiency; network resources remain locked even if no data is currently being transmitted.",
+        "Dynamic Routing: Packet switching divides data into individual blocks (packets) that are routed independently through the network fabric.",
+        "Statistical Multiplexing: It uses statistical multiplexing to allow many users to share one physical link, offering superior efficiency for bursty data.",
+        "Modern Superiority: While packet switching can introduce variable delays, it is the undisputed standard for almost all modern digital systems."
+      ],
       example: "Landline phone call (Circuit) vs browsing a website (Packet).",
       keyPoints: ["Dedicated vs Dynamic paths", "Fixed vs Shared bandwidth", "High vs Low efficiency", "Constant vs Variable delay", "Guaranteed vs Best-effort", "Voice vs Data networks"]
     }
@@ -175,7 +295,14 @@ export const questions: Question[] = [
     question: "Physical layer functions",
     answer: {
       definition: "The Physical Layer is the lowest layer of the OSI model, responsible for the actual transmission and reception of raw unstructured bitstreams over a physical medium.",
-      explanation: "Its primary functions include defining physical characteristics of interfaces (like connector shapes), bit representation (how 0s and 1s are signaled), and transmission rates (number of bits per second). It also handles bit synchronization, ensuring sender and receiver clocks are aligned. The layer defines the transmission mode (Simplex, Half-duplex, or Full-duplex) and the physical topology (Star, Bus, Mesh). It essentially converts digital data from the Data Link layer into electrical, optical, or radio signals that can traverse the communication media.",
+      explanation: [
+        "Raw Transmission: The Physical Layer handles the raw transmission of bits (0s and 1s) over whatever physical medium is being used.",
+        "Specifications: It defines the mechanical and electrical specifications of interfaces, such as cable types and connector pin layouts.",
+        "Encoding: A key function is 'Bit Representation', which determines how 0s and 1s are encoded into signals (e.g., voltage levels or light pulses).",
+        "Timing: It establishes the transmission rate—the number of bits sent per second—and ensures 'Bit Synchronization' between clocks.",
+        "Transmission Mode: The layer defines the transmission mode, determining if data flows in one direction (Simplex) or both (Duplex).",
+        "Topology: It is also responsible for the physical topology, such as Star or Mesh, and handles the actual signal transmission and reception."
+      ],
       example: "Encoding bits into light pulses in a fiber optic cable or voltage levels in an Ethernet wire.",
       keyPoints: ["Raw bit transmission", "Physical interface specs", "Signal encoding/decoding", "Bit synchronization", "Transmission mode control", "Topology definition"]
     }
@@ -187,7 +314,14 @@ export const questions: Question[] = [
     question: "Wireless vs wired communication",
     answer: {
       definition: "Wireless and Wired communication refer to whether data is transmitted through a physical conductor or through electromagnetic waves in free space.",
-      explanation: "Wired communication (Twisted pair, Fiber) offers high stability, superior bandwidth, and better security as the signal is contained within the medium. However, it requires expensive physical infrastructure and limits mobility. Wireless communication (WiFi, LTE) provides excellent mobility and is easier to deploy in hard-to-reach areas. But it is more susceptible to interference, signal attenuation, and environmental factors like rain or walls. Wireless also has inherently lower security as the signal is broadcast to everyone in range. Modern systems often use wired backbones with wireless access for the end user.",
+      explanation: [
+        "Stability: Wired communication (Fiber/Copper) offers high stability, high bandwidth, and superior security as signals stay within the cable.",
+        "Infrastructure Cost: However, wired setups require expensive physical infrastructure and limit users to fixed locations.",
+        "Mobile Access: Wireless communication (WiFi/LTE) provides excellent mobility and is easy to deploy in difficult or remote areas.",
+        "Environmental Vulnerability: Wireless is more susceptible to atmospheric interference, signal fading, and obstacles like walls or rain.",
+        "Broadcasting Risk: Security is a major concern for wireless, as signals are broadcast to everyone in range, requiring complex encryption.",
+        "Network Strategy: Modern enterprise networks use a hybrid: wired backbones for reliability and wireless for last-hop user convenience."
+      ],
       example: "An office workstation on Ethernet (Wired) vs a guest using the office WiFi (Wireless).",
       keyPoints: ["Physical cables vs Radio waves", "High vs Low mobility", "Secure vs Vulnerable to interception", "Low vs High interference", "High vs variable bandwidth", "Installation cost differences"]
     }
@@ -199,7 +333,14 @@ export const questions: Question[] = [
     question: "Fiber optics vs twisted pair",
     answer: {
       definition: "Fiber optics and Twisted Pair are two primary types of guided transmission media used for carrying digital signals across networks.",
-      explanation: "Twisted pair uses copper wires that are twisted together to reduce electromagnetic interference (EMI); it is inexpensive and easy to install but has limited distance and bandwidth. Fiber optics use glass or plastic strands to transmit data as light pulses. Fiber offers significantly higher bandwidth, can transmit over very long distances without repeaters, and is completely immune to EMI and crosstalk. While fiber is more expensive and fragile to handle, it is the standard for high-speed internet backbones, whereas twisted pair remains common for home and office LAN connections.",
+      explanation: [
+        "Interference Cancellation: Twisted pair uses copper wires twisted together to cancel out electromagnetic interference; it is inexpensive and widely used for LANs.",
+        "Optical Reflection: Fiber optics use ultra-thin glass or plastic strands to transmit data as light pulses using total internal reflection.",
+        "Scalable Bandwidth: Fiber offers vastly higher bandwidth and can transmit over kilometers without signal degradation or repeaters.",
+        "Signal Integrity: One of fiber's greatest strengths is total immunity to EMI, RFI, and crosstalk, making it much more reliable than copper.",
+        "Expertise Requirements: While fiber is more expensive and requires specialized skill for installation, it is the standard for high-performance backbones.",
+        "Cost-Efficiency: Twisted pair remains the leader for home and office connections due to its flexibility, durability, and low equipment cost."
+      ],
       example: "Standard Cat6 LAN cable (Twisted Pair) vs a high-speed metropolitan link (Fiber).",
       keyPoints: ["Copper (electrical) vs Glass (optical)", "Low vs Extremely high bandwidth", "Susceptible vs Immune to EMI", "Short vs Very long distance", "Low vs higher cost", "Rigid vs fragile installation"]
     }
@@ -211,7 +352,14 @@ export const questions: Question[] = [
     question: "Microwave transmission advantages",
     answer: {
       definition: "Microwave transmission uses high-frequency radio waves to transmit data via a line-of-sight path between two fixed points.",
-      explanation: "Advantages include the ability to transmit large amounts of data over long distances without the need for laying expensive physical cables across difficult terrain like mountains or oceans. It is relatively easy and cheap to install as it only requires towers with dishes. Microwave links provide high bandwidth compared to standard radio and can be set up quickly for temporary or disaster recovery links. Since it is line-of-sight, it avoids the complexities of burying cables in urban areas. It is highly effective for point-to-point communication where a direct fiber link is impractical.",
+      explanation: [
+        "Line-of-Sight: Microwave links transmit data via high-frequency radio waves along a precise line-of-sight path between two fixed towers.",
+        "Infrastructure Savings: A major advantage is avoiding the immense cost of laying physical cables across mountains, oceans, or crowded urban streets.",
+        "Deployment Speed: The infrastructure is relatively cheap, primarily requiring dishes and towers rather than thousands of miles of trenching.",
+        "High Capacity: Microwave systems provide high bandwidth compared to standard radio and can be set up rapidly for disaster recovery.",
+        "Physical Security: Since the medium is the air, there are no concerns about cable theft or physical damage to buried wires in public areas.",
+        "Geographical Reach: It is the ideal choice for point-to-point communication in geographically challenging areas where fiber is impractical."
+      ],
       example: "Connecting two office towers across a busy city street using a roof-to-roof microwave link.",
       keyPoints: ["Long distance reach", "No physical cabling required", "High bandwidth capacity", "Easy across difficult terrain", "Rapid deployment", "Cost-effective infrastructure"]
     }
@@ -223,7 +371,14 @@ export const questions: Question[] = [
     question: "Optical transmission system components",
     answer: {
       definition: "An optical transmission system consists of hardware components that work together to transmit data as light signals through fiber optic cables.",
-      explanation: "The key components include the Light Source (Laser or LED) which converts electrical signals into light pulses. The Transmission Medium is the optical fiber (Glass or Plastic) which guides the light using total internal reflection. The Optical Receiver (Photodiode) converts the incoming light signals back into electrical form. Between these, Optical Amplifiers or Repeaters may be used to boost the signal over long distances without converting it back to electrical. Modern systems also use Multiplexers (WDM) to send multiple data streams at different wavelengths over a single fiber, drastically increasing total capacity.",
+      explanation: [
+        "Source Module: The system starts with a Light Source (Laser or LED) that converts high-speed electrical signals into coherent light pulses.",
+        "Optical Conduit: The Transmission Medium is the optical fiber, which guides these light pulses over long distances using internal reflection.",
+        "Detection Unit: At the destination, an Optical Receiver (Photodiode) converts the photons back into an electrical bitstream for processing.",
+        "Signal Boosting: Optical Amplifiers are used periodically to boost the light signal's strength without needing to convert it back to electricity.",
+        "Spectral Density: Wavelength Division Multiplexers (WDM) allow multiple data channels to travel simultaneously over one fiber at different colors.",
+        "Mechanical Coupling: Connectors and Splicers are critical mechanical components that ensure the light transitions between cables with minimal loss."
+      ],
       example: "A fiber-to-the-home (FTTH) setup consisting of an ONT (Receiver/Source) and miles of fiber cable.",
       keyPoints: ["Light source (LED/Laser)", "Optical fiber medium", "Photodiode receiver", "Optical amplifiers", "Multiplexers (WDM)", "Signal conversion process"]
     }
@@ -393,10 +548,27 @@ export const questions: Question[] = [
     marks: 15,
     question: "Hamming code error detection problem",
     answer: {
-      definition: "Hamming Code is an error-correcting code developed by Richard Hamming that inserts redundant parity bits at specific positions to enable single-bit error detection and correction.",
-      explanation: "The Hamming code works by adding 'r' redundancy bits to 'm' data bits. These bits are placed at positions that are powers of 2 (1, 2, 4, 8...). Each parity bit covers a specific set of data bits based on their binary position representation. For example, in a (7,4) code, there are 4 data bits and 3 parity bits. To solve a problem, one first determines the required parity bits using the formula 2^r >= m + r + 1. The sender calculates the parity bits (Even or Odd) based on the assigned data bits. The receiver re-calculates these parity bits upon arrival. If an error occurred, the decimal sum of the positions with failed parity checks points exactly to the index of the flipped bit. Flipping that bit back corrects the error without retransmission. This method is efficient for single-bit flips but cannot correct multi-bit errors without more complexity.",
-      diagramExplanation: "A bit mapping showing positions 1 to 7: P1, P2, D1, P3, D2, D3, D4. Circles show how parity bits overlap with specific data pits.",
-      example: "Transmitting '1011' with parity bits computed: [P1][P2]1[P3]011 -> 0110011. If bit 5 flips, receiver calculates syndromes pointing to position 5.",
+      definition: "Hamming Code is an error-correcting code developed by Richard Hamming that inserts redundant redundancy bits at specific power-of-two positions to enable the detection and automatic correction of single-bit errors.",
+      explanation: [
+        "Concept: Hamming code is a powerful Block Code designed to overcome the limitations of simple parity, which can detect but not fix errors.",
+        "Positioning: It works by inserting 'Overlapping Parity Bits' at specific positions (powers of two) within the data stream.",
+        "Parity Logic: Each parity bit is mathematically responsible for checking a unique subset of the data bit positions based on binary logic.",
+        "Detection Pattern: When a bit flip occurs during transmission, the corresponding parity checks will fail, creating a unique pattern.",
+        "Position Calculation: By analyzing which parity bits are incorrect, the receiver can calculate the precise decimal position of the faulty bit.",
+        "Forward Correction: The receiver then automatically flips the bit back to its correct state, providing 'Forward Error Correction' without retransmission.",
+        "Hardware Performance: This is critical for high-speed hardware like ECC computer memory where waiting for a re-send would severely impact system performance."
+      ],
+      detailedPoints: [
+        "Positioning Rule: Redundancy bits are placed at positions that are powers of 2 (1, 2, 4, 8, 16...), while data bits fill the remaining gaps (3, 5, 6, 7, 9...).",
+        "Redundancy Formula: To calculate 'r' redundancy bits for 'm' data bits, we use: 2^r >= m + r + 1. For 4 data bits, 3 parity bits are required (2^3 >= 4+3+1).",
+        "Parity Logic: Each parity bit, say P(n), checks all bits whose position binary representation has a '1' at the nth digit. P1 checks 1, 3, 5, 7, 9... P2 checks 2, 3, 6, 7, 10...",
+        "Encoding Process: The sender calculates these parity bits (usually using even parity) and inserts them into the message before transmission.",
+        "Syndrome Calculation: At the receiver, all parity checks are re-performed. The results are used to form a 'syndrome word'.",
+        "Error Correction: If the syndrome is all zeros, no error occurred. If not, the syndrome's binary value converted to decimal gives the exact position of the error.",
+        "Efficiency Trade-off: Hamming code adds significant overhead (bit cost) but saves time by eliminating the need for NAK/Retransmision protocols."
+      ],
+      diagramExplanation: "A bit mapping table showing positions 1 to 7: P1, P2, D1, P4, D2, D3, D4. Venn diagrams show how P1, P2, and P4 overlap to protect specific data bits (D1-D4).",
+      example: "Transmitting '1101' (4 bits). formula: 2^3 >= 4+3+1. Parity bits at 1, 2, 4. Result: P1-P2-D1-P4-D2-D3-D4. If position 6 flips, syndrome points to 6.",
       advantages: ["Self-correcting", "No retransmission needed", "Reliable for short bursts", "Mathematically simple"],
       disadvantages: ["High overhead", "Only corrects 1-bit", "Limited to low error rates"],
       applications: ["ECC memory (RAM)", "Disk drives", "Satellite communication"],
@@ -410,10 +582,27 @@ export const questions: Question[] = [
     marks: 15,
     question: "Collision free protocols",
     answer: {
-      definition: "Collision-free protocols are a class of Medium Access Control (MAC) protocols that ensure collisions never occur on a shared channel by pre-allocating access to specific stations.",
-      explanation: "Unlike random access protocols like ALOHA, collision-free protocols use deterministic mechanisms to control channel access. The Bit-Map Protocol requires each station to broadcast a 1-bit signal during its reserved slot in a contention period; after the period, stations that signaled 1 transmit in order. In Binary Countdown, stations broadcast their addresses bit by bit; stations with a '0' in a position drop out if they hear a '1', leaving the station with the highest address to transmit. Limited-Contention protocols combine these with random access to balance efficiency. These protocols work well under high load because they eliminate the bandwidth wasted by collisions. However, they introduce overhead in the contention or reservation phase, which can be inefficient under low load when only one station wants to transmit. They are essential for systems where predictable performance and high throughput are required.",
-      diagramExplanation: "A timeline showing a Contention-slot period followed by a Data-transmission period for various stations.",
-      example: "High-speed industrial networks often use reservation-based collision-free protocols to ensure robotic sync.",
+      definition: "Collision-free protocols are a sophisticated class of Medium Access Control (MAC) techniques specifically engineered to eliminate the possibility of data collisions by pre-scheduling station access.",
+      explanation: [
+        "Medium Competition: In shared networks, stations often 'compete' for the channel, leading to data collisions that waste significant network resources.",
+        "Reservation Phase: Collision-free protocols eliminate this chaos by requiring an 'Orderly Phase' or reservation period before any data is sent.",
+        "Deterministic Logic: These protocols are 'Deterministic', meaning they guarantee every station a turn to transmit without interruptions or collisions.",
+        "Load Performance: Under heavy network loads, these protocols maintain much higher throughput compared to 'Contention-based' protocols like CSMA/CD.",
+        "Bit-Map Signaling: The Bit-Map protocol uses a reservation frame where stations 'raise their hand' by setting a specific bit to signal their need to talk.",
+        "Binary Election: The Binary Countdown protocol uses a silent binary auction based on station addresses to determine the next speaker efficiently.",
+        "Capacity Maximization: By ensuring that every bit sent belongs to a successful frame, these protocols maximize the useful capacity of the physical link."
+      ],
+      detailedPoints: [
+        "Elimination of Chaos: These protocols remove the random 'backoff' time required by CSMA/CD, ensuring the channel is never empty when data is waiting.",
+        "Reservation Concept: A dedicated time period (contention period) is used to establish who wants to send and in what specific order.",
+        "Bit-Map Mechanism: In an N-station network, an N-bit reservation frame is sent. If station 'i' wants to send, it marks the i-th bit as 1.",
+        "Binary Countdown: Stations transmit their addresses in binary; at each bit-time, a '0' station withdraws if it hears a '1' from a higher-priority peer.",
+        "Throughput Stability: Unlike random access, the efficiency of collision-free protocols remains stable and high even as the number of active stations increases.",
+        "Fairness vs Priority: These protocols can be tuned to be strictly fair (round-robin) or to provide absolute priority to high-importance nodes.",
+        "Overhead Cost: The main disadvantage is the 'silent time' spent during the reservation phase, which becomes noticeable when only one station wants to send."
+      ],
+      diagramExplanation: "A timeline diagram showing a Contention Frame (Reservation Phase) where bits are set, followed by a series of Data Frames sent by the successful stations without any overlap.",
+      example: "In a 4-node network, nodes 1 and 3 set their bits in the reservation frame. Data transmits as: [Node 1] then [Node 3] with zero collision.",
       advantages: ["Zero collisions", "High throughput under load", "Predictable latency", "Fair bandwidth sharing"],
       disadvantages: ["Reservation overhead", "Inefficient at low load", "Complex logic"],
       applications: ["Industrial automation", "Real-time systems", "High-load backbones"],
@@ -427,10 +616,27 @@ export const questions: Question[] = [
     marks: 15,
     question: "Bit-map vs Binary Countdown protocol",
     answer: {
-      definition: "Bit-map and Binary Countdown are two primary reservation-based collision-free protocols used at the MAC sublayer to manage shared medium access.",
-      explanation: "The Bit-map protocol uses a contention period of 'N' slots where each of the 'N' stations can send a single bit to reserve the channel. If station 5 wants to send, it sets the 5th bit to 1. After 'N' slots, all stations know who wants to transmit and they do so in order. Binary Countdown improves this by having stations compete using their binary binary IDs. During each bit-time of the address, stations broadcast their bit; if a station broadcasts 0 but hears 1 from another, it withdraws. The station with the highest ID always wins. Binary Countdown is more efficient as the contention period is only 'log2(N)' bits long, whereas Bit-map is 'N' bits long. However, Binary Countdown can be unfair as higher-numbered stations always get preference, requiring solutions like virtual IDs. Both successfully prevent collisions, making them superior to CSMA under heavy network loads.",
-      diagramExplanation: "A comparison showing a long 8-slot contention period (Bit-map) vs a short 3-slot contest based on address bits (Binary Countdown).",
-      example: "Station 3 (011) and Station 5 (101) competing in Binary Countdown: 5 wins because it has 1 in the most significant bit.",
+      definition: "Bit-map and Binary Countdown are the two foundational reservation-based collision-free protocols used to achieve maximum channel efficiency by avoiding the collision resolution cycles of random access.",
+      explanation: [
+        "Zero Collision Goal: Both protocols aim for a collision-zero network, but use different logical methods to achieve their reservation goals.",
+        "Roll-Call Mechanism: The Bit-map protocol acts like a roll-call: every station has a dedicated slot, requiring 'N' bits for 'N' stations.",
+        "Scaling Limits: This is perfectly efficient for consistent small networks but can become slow when the number of stations is very large and mostly idle.",
+        "Bit-wise Auction: Binary Countdown is a more competitive mechanism where stations broadcast their unique addresses bit-by-bit to claim the channel.",
+        "Priority Filtering: In Countdown, a station with a '0' withdrew if it hears a '1' from a peer, ensuring the highest ID wins the competition rapidly.",
+        "Bit-Efficiency: Countdown is faster for large networks because it only requires log2(N) bits, significantly reducing the reservation overhead.",
+        "Fairness Management: While Countdown is efficient, it is naturally 'unfair' to lower-priority IDs, requiring ID rotation logic to ensure balanced access."
+      ],
+      detailedPoints: [
+        "Reservation Efficiency: Bit-map requires 'N' contention bits for 'N' stations; Binary Countdown only requires 'log2(N)' bits, making it much faster for large groups.",
+        "Conflict Logic: In Countdown, collisions are used 'positively' to eliminate lower-priority stations until only one remains in the contest.",
+        "Strict Ordering: Bit-map ensures a strict, predictable round-robin order of transmission based on the numerical sequence of station slots.",
+        "ID Priority: The highest binary address always wins in the Countdown protocol, presenting a 'Static Priority' challenge that must be managed.",
+        "Hardware Requirements: Bit-map is extremely simple and requires no address comparison; Countdown requires stations to monitor the line while transmitting their ID.",
+        "Load Sensitivity: Both protocols remain efficient under near 100% network load, unlike CSMA which suffers from 'thrashing' as collisions multiply.",
+        "Hybrid Designs: Modern sophisticated MAC layers often combine the speed of Countdown for small clusters with the fairness of Bit-map for overall coordination."
+      ],
+      diagramExplanation: "A comparison chart showing 8 reservation slots for Bit-map vs. a 3-bit binary competition for Binary Countdown in a network of 8 stations.",
+      example: "Stations 2 (010) and 6 (110) compete: At the first bit, 6 sends '1' and 2 sends '0'. Station 2 immediately drops out, allowing 6 to win the channel.",
       advantages: ["Both: No collisions", "Countdown: Short contention", "Bit-map: Transparent order"],
       disadvantages: ["Bit-map: Inefficient for large N", "Countdown: Unfairness risk"],
       applications: ["Reservation-based LANs", "Bus-based architectures", "Real-time control"],
@@ -444,10 +650,27 @@ export const questions: Question[] = [
     marks: 15,
     question: "Sliding window protocols",
     answer: {
-      definition: "Sliding window protocols are data link layer mechanisms used for flow control and reliable delivery, allowing multiple frames to be in transit before an acknowledgment is required.",
-      explanation: "The core idea is that the sender maintains a window of frames it is allowed to send. As acknowledgements (ACKs) return, the window 'slides' forward, allowing new frames to enter. The protocols include One-bit Sliding Window (simplest), Go-Back-N, and Selective Repeat. Go-Back-N (GBN) allows multiple frames to be sent, but if one is lost, the receiver discards all subsequent frames and the sender re-starts from the failed frame. Selective Repeat (SR) is more efficient; the receiver buffers out-of-order frames and the sender only retransmits the missing one. These protocols significantly improve link utilization over 'stop-and-wait' because they fill the 'pipe' with data. They handle variable delays and packet loss using sequence numbers and timers. The window size balances throughput with the memory required for buffering at both ends. They are fundamental for high-speed, long-distance communication links where the round-trip time is long.",
-      diagramExplanation: "A timeline showing 'Sender Window' and 'Receiver Window' moving as packets [0,1,2] are sent and ACKs [0,1,2] are received.",
-      example: "Modern reliable transport protocols like TCP use the sliding window concept for global-scale flow control.",
+      definition: "Sliding window protocols are the heavy-duty flow control and error-handling mechanisms that allow multiple data frames to be sent across a network link before requiring an acknowledgment.",
+      explanation: [
+        "Concurrent Transmission: Sliding window protocols are sophisticated mechanisms that allow a sender to transmit multiple data units before requiring an acknowledgment.",
+        "Active Capacity: The 'Window Size' defines the maximum number of frames that can be 'in flight' at any given time, filling the network 'pipe' effectively.",
+        "Progressive Flow: As acknowledgments return from the receiver, the window 'slides' forward, enabling the transmission of new frames from the backlog.",
+        "Link Utilization: This pipelining approach significantly increases link utilization and throughput compared to simple 'one-at-a-time' protocols.",
+        "Trio of Functions: These protocols manage three critical networking challenges: flow control, error recovery, and sequential packet tracking.",
+        "Order Guarantee: By utilizing sequence numbers and specialized timers, they ensure that data is delivered in the correct order, even across noisy links.",
+        "Operational Varieties: Variations like Go-Back-N and Selective Repeat offer different trade-offs between implementation simplicity and transmission efficiency."
+      ],
+      detailedPoints: [
+        "Pipelined Transmission: Allows multiple frames to be in flight simultaneously, drastically increasing the speed compared to serial transmission.",
+        "Sequence Number Range: Every frame is given a unique index. The range of these numbers must be large enough to distinguish between new and old frames.",
+        "Sender Window Logic: A buffer on the sender side that keeps a copy of every unacknowledged frame in case it needs to be sent again.",
+        "Receiver Window Logic: A buffer that determines which frame indices the receiver is currently willing to accept from the network.",
+        "Cumulative vs Individual ACK: Some protocols confirm a whole block of data at once, while others confirm each individual frame one-by-one.",
+        "Protocol Varieties: The three main versions are One-bit (Stop-and-wait), Go-Back-N (retransmit all), and Selective Repeat (retransmit one lost frame).",
+        "Resource Balancing: Larger window sizes increase throughput but require more RAM in the network equipment to store the buffered data."
+      ],
+      diagramExplanation: "A timeline showing a sender sending frames 0, 1, 2. After ACK 0 arrives, the window 'slides' from [0,1,2] to [1,2,3], enabling the transmission of frame 3.",
+      example: "A high-speed fiber optic link where 100 frames are sent in a single millisecond before the first acknowledgment has time to return.",
       advantages: ["High link utilization", "Robust flow control", "Pipelined communication", "Scalable speed"],
       disadvantages: ["High memory cost", "Complex implementation", "Overhead on noisy links"],
       applications: ["High-speed LANs", "Satellite links", "Reliable streaming"],
@@ -461,10 +684,27 @@ export const questions: Question[] = [
     marks: 15,
     question: "CRC error detection with example",
     answer: {
-      definition: "Cyclic Redundancy Check (CRC) is a powerful error-detection code based on polynomial division used to detect accidental changes to raw data in digital networks.",
-      explanation: "CRC treats a block of data as a binary polynomial M(x). The sender and receiver agree on a generator polynomial G(x). The sender appends a number of '0's (equal to the degree of G(x)) to the end of the data and performs binary division by G(x). The remainder of this division is the CRC Checksum, which replaces the appended zeros. The receiver performs the same division on the incoming message. If the resulting remainder is zero, the data is accepted as error-free; otherwise, it is rejected. CRC is extremely effective at detecting burst errors (multiple flipped bits in a sequence) and is implemented easily in hardware using shift registers. It is much more reliable than simple checksums or parity bits. Common generators include CRC-16 and CRC-32, which have standardized polynomials designed to maximize detection probability for specific data lengths and channel characteristics.",
-      diagramExplanation: "A long-division calculation showing the XOR-based binary division of the message by the generator polynomial.",
-      example: "Message 1101, Generator 1011 (degree 3). Append '000'. 1101000 / 1011 = Remainder 001. Send 1101001.",
+      definition: "Cyclic Redundancy Check (CRC) is a high-performance error-detection method based on binary polynomial division, primarily used to protect raw bitstreams in industrial data links.",
+      explanation: [
+        "Polynomial Basis: CRC is a powerful error-detection technique based on the mathematics of binary polynomial division, capable of catching complex burst errors.",
+        "Data Interpretation: The data bitstream is treated as a single long polynomial, with the bit values acting as the coefficients of each term.",
+        "Agreed Divisor: Both the sender and receiver agree on a 'Generator Polynomial', which acts as the mathematical divisor for the process.",
+        "Calculation Phase: The sender appends a calculated number of zero bits to the message and performs modulo-2 division using binary XOR operations.",
+        "Appended Remainder: The resulting remainder, known as the CRC checksum, is appended to the original data before the frame is transmitted.",
+        "Detection Check: The receiver performs the exact same division on the arriving frame; any remainder other than zero indicates a bit-level corruption.",
+        "Hardware-Optimized: Due to its high mathematical efficiency, CRC can be implemented directly in hardware, enabling real-time error checking for gigabit links."
+      ],
+      detailedPoints: [
+        "Mathematical Base: Both the data message and the generator are treated as polynomials (e.g., 11001 is x^4 + x^3 + 1).",
+        "Padding Phase: The sender appends 'n' zeros to the data, where 'n' is the degree of the chosen generator polynomial.",
+        "XOR Division: The padded bitstream is divided by the generator using modulo-2 long division (no carrying or borrowing).",
+        "Remainder as Checksum: The bits remaining at the end of the division are the CRC bits, which replace the previously added zeros.",
+        "Verification: The receiver divides the entire frame by the same generator. A non-zero result triggers an immediate frame rejection.",
+        "Error Coverage: Standardized generators like CRC-32 are designed to detect 100% of single/double bit errors and most burst errors.",
+        "Industry Usage: Essential for hardware-level integrity in Ethernet, Wi-Fi, USB, and high-speed storage interfaces."
+      ],
+      diagramExplanation: "A long-division visual showing the Data+00... being divided by the Generator. XOR steps are highlighted, and the final remainder is shown inserted at the end of the frame.",
+      example: "Data: 1011 (degree 3), Gen: 1001. Append 3 zeros: 1011000. Remainder is found (e.g., 011), and frame 1011011 is transmitted.",
       advantages: ["High detection rate", "Hardware friendly", "Low overhead", "Catches burst errors"],
       disadvantages: ["No error correction", "Mathematical understanding needed"],
       applications: ["Ethernet frames", "Hard disks", "Modem protocols", "ZIP files"],
@@ -478,10 +718,27 @@ export const questions: Question[] = [
     marks: 15,
     question: "Stop-and-wait ARQ protocol",
     answer: {
-      definition: "Stop-and-wait Automatic Repeat Request (ARQ) is a simple data link protocol that ensures reliable delivery by sending one frame at a time and waiting for an acknowledgment.",
-      explanation: "In Stop-and-wait ARQ, the sender sends a frame and starts a timer. It then enters a wait state. The receiver receives the frame, checks for errors using a checksum, and if valid, sends an ACK. If the sender receives the ACK before the timer expires, it sends the next frame. If the ACK is lost or the frame is corrupted, the timer expires, and the sender retransmits the same frame. To handle duplicate frames (caused by a lost ACK), the protocol uses '0' and '1' as sequence numbers for alternating frames. This protocol is extremely easy to implement but highly inefficient for high-bandwidth or long-distance links because the sender is idle for most of the round-trip time. It serves as the foundational concept from which more complex 'sliding window' protocols evolved to improve utilization. Despite its simplicity, it is still used in low-power, primitive communication systems where complex buffering is not feasible.",
-      diagramExplanation: "A vertical time chart showing: Sender (F0) -> Receiver (ACK0) -> Sender (F1) -> Receiver (Timeout/Wait).",
-      example: "Old dial-up modem protocols or simple serial communication between a sensor and a microcontroller.",
+      definition: "Stop-and-wait Automatic Repeat Request (ARQ) is a fundamental, reliable data link protocol that ensures every frame is confirmed before the next one is sent.",
+      explanation: [
+        "Core Philosophy: Stop-and-wait ARQ is the most fundamental reliable protocol, ensuring every single frame is acknowledged before the next one is sent.",
+        "Timer Start: The sender transmits a frame and starts a 'Retransmission Timer', then pauses all further output until a confirmation arrives.",
+        "Positive Feedback: If the receiver confirms the frame via an 'ACK' packet, the sender proceeds to the next frame in the sequence.",
+        "Retry Trigger: If the timer expires before an ACK is received, the sender assumes the frame was lost and automatically retransmits the original data.",
+        "Duplicate Guard: To prevent duplicates from being misinterpreted, the protocol uses 'Alternating Bits' (0 and 1) as rotating sequence numbers.",
+        "Latency Bottleneck: While extremely reliable, this protocol is inherently slow because the physical link sits idle while waiting for the round-trip signal.",
+        "Ideal Context: It is best suited for simple, low-power environments where correctness is more important than absolute transmission speed."
+      ],
+      detailedPoints: [
+        "Serial Logic: Only one frame can be 'in flight' at a time, making the protocol inefficient for links with high latency.",
+        "Error Detection: The receiver uses a checksum to verify every frame. If it detects an error, it simply discards the frame and waits.",
+        "Retransmission Timer: A critical component on the sender side that triggers a resend if an acknowledgment index is not received in time.",
+        "Alternating Sequence Number: Frames and ACKs are marked with 0 or 1 to distinguish between retransmissions and new data.",
+        "Acknowledgment (ACK): The receiver sends a small control frame to notify the sender that the data arrived successfully.",
+        "Link Utilization: Very low efficiency (U = T_frame / (T_frame + 2 * T_prop)), as the sender spends most of its time in a 'wait' state.",
+        "Usage Case: Ideal for very simple, low-power hardware links where complex buffering is more expensive than the cost of slow speed."
+      ],
+      diagramExplanation: "A vertical time-sequence diagram showing: Sender (Frame 0) sends, Receiver (ACK 0) replies, and Sender (Frame 1) following after success.",
+      example: "A low-power smart sensor sending a single temperature reading to a base station and waiting for confirmation before shutting down to save battery.",
       advantages: ["Simple implementation", "Minimal memory and buffers", "Effective for slow links"],
       disadvantages: ["Extremely low efficiency", "Wasted bandwidth", "High latency"],
       applications: ["Low-power sensors", "Simple serial links", "Foundation for education"],
@@ -496,7 +753,15 @@ export const questions: Question[] = [
     question: "Data link layer responsibilities",
     answer: {
       definition: "The Data Link Layer (Layer 2) is responsible for the reliable transfer of data frames across a physical link between two directly connected network nodes.",
-      explanation: "Its primary responsibilities include Framing (packaging bits into packets), Physical Addressing (using MAC addresses), and Error Control (detecting and correcting bit errors). It also manages Flow Control to prevent a fast sender from overwhelming a slow receiver. Another crucial task is Access Control (MAC sublayer) in shared-media networks like WiFi, determining which station can transmit when. The layer provides service to the Network layer by hiding the complexities of the physical medium. It essentially turns a raw, potentially unreliable physical connection into a reliable, addressed communication channel. It implements protocols like Ethernet, PPP, and WiFi MAC. It manages hardware specifics like preamble signaling and frame-ending delimiters. By handling these low-level synchronization and reliability tasks, it allows higher layers to focus on abstract routing and application logic without worrying about the specifics of the hardware wires or wireless frequencies.",
+      explanation: [
+        "Bridge Role: The Data Link Layer transforms the raw bitstream of the physical layer into a reliable, addressed communication channel.",
+        "Bit Packaging: It is responsible for 'Framing', which involves packaging networking packets into structured frames with headers and trailers.",
+        "Logical Identity: Physical addressing is handled via MAC addresses, allowing devices to identify each other on a local segment or bus.",
+        "Corruption Defense: It implements Error Control to detect and sometimes correct bit-level corruptions that occur during physical transmission.",
+        "Speed Balancing: Flow Control mechanisms are used to synchronize the speeds of the sender and receiver, preventing data overflows.",
+        "Shared Rights: The Medium Access Control (MAC) sublayer determines which station has the right to use a shared channel at any given time.",
+        "Function Isolation: By abstracting the physical hardware, Layer 2 allows higher layers to focus on global routing and complex application logic."
+      ],
       diagramExplanation: "A block diagram showing the two sublayers: LLC (Logical Link Control) and MAC (Medium Access Control) within Layer 2.",
       example: "An Ethernet switch reading the source and destination MAC addresses to forward a frame to the correct port.",
       advantages: ["Hardware abstraction", "Reliable segment comms", "Physical address isolation"],
@@ -514,10 +779,17 @@ export const questions: Question[] = [
     marks: 8,
     question: "Selective Repeat protocol",
     answer: {
-      definition: "Selective Repeat is an advanced sliding window protocol that only retransmits frames that were actually lost or corrupted, rather than sending an entire window again.",
-      explanation: "In Selective Repeat, the receiver maintains a buffer for out-of-order frames that arrive correctly within the window. Instead of discarding frames after a missing one (like Go-Back-N), the receiver stores them and sends a Negative Acknowledgment (NAK) for the missing frame. The sender then retransmits only that specific piece of data. Once the missing frame arrives, the receiver delivers the whole sequence to the higher layer in order. This protocol maximizes efficiency on noisy or high-latency links but requires significantly more memory at the receiver and more complex sequence number logic on both ends of the connection.",
-      example: "Efficient file transfers over satellite links where latency is high and errors are occasional.",
-      keyPoints: ["Retransmit only lost frames", "Receiver side buffering", "NACK for error signaling", "High efficiency/link utilization", "Complex window management", "Requires more local memory"]
+      definition: "Selective Repeat is an elite error-control protocol that achieves maximum throughput by retransmitting only the specific packets that were lost, avoiding unnecessary repetition.",
+      explanation: [
+        "Efficiency: Selective Repeat is the most efficient sliding window variation, focusing retransmissions only on lost or corrupt frames.",
+        "Resource Waste Avoidance: In simpler protocols like Go-Back-N, losing one frame forces a re-send of the entire window, wasting significant bandwidth.",
+        "Receiver Storage: Selective Repeat uses a buffer at the receiver's end to store 'out-of-order' frames that arrived safely after a gap.",
+        "Individual Tracking: The sender maintains individual timers for each frame and only repeats the specific index that went unacknowledged.",
+        "Sequence Assembly: Once the 'hole' in the receiver's buffer is filled, the entire sequence is delivered to the higher networking layers.",
+        "Deployment Case: This protocol is essential for high-latency or error-prone links, such as satellite or international fiber connections."
+      ],
+      example: "A high-speed Internet download over a cross-ocean fiber link where individual packet loss is corrected without slowing down the entire transfer.",
+      keyPoints: ["Surgical Retransmit: Only lost frames", "Receiver Buffering: Holds out-of-order data", "Flow Integrity: Delivers data in perfect sequence", "High Efficiency: Ideal for noisy/high-delay links", "Dual Windowing: Sender and receiver have windows", "Complex Logic: Requires individual packet timers"]
     }
   },
   {
@@ -527,7 +799,14 @@ export const questions: Question[] = [
     question: "Go-Back-N vs Selective Repeat",
     answer: {
       definition: "Go-Back-N and Selective Repeat are two variations of sliding window protocols used to handle errors in piplelined data transmission.",
-      explanation: "In Go-Back-N (GBN), if one frame is lost, the receiver discards all subsequent frames, and the sender must retransmit the entire window starting from the lost frame. In Selective Repeat (SR), the receiver buffers out-of-order frames, and the sender only retransmits the missing one. GBN is simpler and requires a receiver window size of 1, saving memory. SR is much more efficient on heavy-traffic or error-prone links as it avoids redundant data transfer. SR requires more memory at both ends and more complex logic to handle the out-of-order buffer and sequence numbers. GBN is easier to implement for low-power hardware.",
+      explanation: [
+        "Failure Handling: In Go-Back-N, a single lost frame at the receiver causes all subsequent arriving frames to be discarded immediately.",
+        "Window Reset: The sender's window must then 'go back' and re-transmit the entire set of frames starting from the point of failure.",
+        "Buffer Optimization: Selective Repeat improves this by adding a receiver buffer that can hold 'good' out-of-order data during a recovery.",
+        "Memory Efficiency: Go-Back-N is simpler to implement and requires much less memory at the receiver, as it only needs to track one index.",
+        "Link Optimization: Selective Repeat is significantly more efficient for high-speed or noisy links where frequent window retransmissions are costly.",
+        "Implementation Cost: SR requires independent timers at the sender and complex sequence tracking at the receiver, making it harder to build."
+      ],
       example: "GBN in low-cost serial links vs SR in high-speed reliable protocols.",
       keyPoints: ["GBN: retransmit whole window", "SR: retransmit only missing", "GBN: Receiver window is 1", "SR: Large receiver window", "SR is more efficient", "GBN is less complex"]
     }
@@ -539,7 +818,14 @@ export const questions: Question[] = [
     question: "Flow control methods",
     answer: {
       definition: "Flow control is a set of procedures used to regulate the data transmission rate between a sender and a receiver to prevent a fast sender from overwhelming a slow receiver.",
-      explanation: "There are two primary categories: Feedback-based and Rate-based. Feedback-based flow control includes 'Stop-and-Wait', where the sender waits for an ACK before sending more, and 'Sliding Window', where the receiver provides a 'window size' limit for unacknowledged data. Another common method is 'XON/XOFF' software signaling or hardware flow control using RTS/CTS lines in serial cables. These methods ensure that the receiver's buffers do not overflow, which would otherwise lead to packet loss and wasteful retransmissions. Proper flow control is essential for ensuring stability and efficiency in heterogeneous network environments where devices have vastly different processing speeds.",
+      explanation: [
+        "Synchronization: Flow control acts as a synchronization mechanism between a fast sender and a potentially slower receiving device.",
+        "ACK Dependency: Feedback-based methods, such as 'Stop-and-Wait', require a confirmation for every individual datum sent.",
+        "Credit System: The 'Sliding Window' method uses a dynamic credit-based system where the receiver advertises its current free capacity.",
+        "Negotiated Speed: Rate-based control involves pre-negotiated limits on how many packets can be sent per second without further checks.",
+        "Physical Control: Hardware flow control uses physical signals (like RTS/CTS lines) to pause and resume the flow of electricity on a wire.",
+        "Overflow Prevention: Effective flow control prevents buffer overflows at the receiver, which would otherwise trigger costly packet losses."
+      ],
       example: "A server slowing down its data output because a shared WiFi client's buffer is filling up.",
       keyPoints: ["Regulates sender transmission rate", "Prevents receiver buffer overflow", "Feedback-based (ACK/Window)", "Rate-based (Fixed limits)", "Stop-and-wait vs Sliding window", "Hard vs Soft signaling"]
     }
@@ -551,7 +837,14 @@ export const questions: Question[] = [
     question: "CSMA/CD working",
     answer: {
       definition: "Carrier Sense Multiple Access with Collision Detection (CSMA/CD) is an early Ethernet MAC protocol where stations listen before and during transmission to detect and handle collisions.",
-      explanation: "Stations first listen to the medium (Carrier Sense); if busy, they wait. If idle, they start transmitting. Crucially, they continue listening while sending. If two stations send at once, they detect a collision by monitoring the signal voltage. Upon detection, they immediately stop, send a 'jam signal' to notify the whole network, and then each waits for a random period (using Binary Exponential Backoff) before retrying. This randomness reduces the chance of another collision. It was highly effective for shared-bus Ethernet but has become less relevant with the rise of full-duplex Ethernet switches where collisions are physically impossible.",
+      explanation: [
+        "Carrier Sensation: In CSMA/CD, a station first listens to the medium (Carrier Sense); if the channel is idle, it attempts to transmit.",
+        "Active Monitoring: While transmitting, the station continues to listen to ensure that another node didn't start sending at same time.",
+        "Collision Detection: If a collision occurs—detected by a signal voltage spike—the station immediately stops and sends a 'Jam Signal'.",
+        "Error Awareness: The Jam Signal ensures that all stations in the network are aware of the collision and discard the current frame.",
+        "Fairness Calculation: To prevent repeated collisions, the station waits for a random time using the 'Binary Exponential Backoff' algorithm.",
+        "Network Evolution: This protocol was the heart of shared-hub Ethernet but is rarely used now due to full-duplex switched networks."
+      ],
       example: "Old-style Ethernet networks using a hub or a common coaxial cable (10Base2/10Base5).",
       keyPoints: ["Listen before talk principle", "Monitor while speaking", "Jam signal on collision", "Binary Exponential Backoff", "Shared medium management", "Collision recovery logic"]
     }
@@ -563,7 +856,14 @@ export const questions: Question[] = [
     question: "Slotted vs Pure Aloha",
     answer: {
       definition: "Pure ALOHA and Slotted ALOHA are random access protocols developed for satellite and radio networks to manage shared channel access.",
-      explanation: "In Pure ALOHA, stations transmit whenever they have a frame to send. If two frames overlap even slightly, a collision occurs and both are lost. Its maximum throughput is only about 18%. Slotted ALOHA improves this by dividing time into discrete slots. A station can only start transmitting at the beginning of a slot. This synchronization reduces the 'vulnerable period' by half, doubling the maximum efficiency to about 37%. While Slotted ALOHA is more efficient, it requires all stations to maintain synchronized clocks, which adds complexity compared to the completely decentralized 'send-at-will' nature of Pure ALOHA.",
+      explanation: [
+        "Ad-hoc Access: Pure ALOHA is a completely decentralized protocol where a station transmits a frame whenever it is ready.",
+        "Destructive Overlap: Because there is no coordination, if two frames overlap by even one bit, a collision occurs and both are corrupted.",
+        "Throughput Limits: This inefficiency limits Pure ALOHA to a maximum channel utilization of approximately 18% under heavy loads.",
+        "Temporal Windows: Slotted ALOHA improves this by dividing time into discrete, synchronized 'slots' that data must fit into.",
+        "Reduction of Risk: A station can only begin a transmission at the start of a slot, reducing the 'Vulnerable Period' by half.",
+        "Efficiency Boost: This simple synchronization doubles the maximum theoretical efficiency to 37%, though it requires global clock sync."
+      ],
       example: "Early digital satellite networks and initial radio-based networking concepts.",
       keyPoints: ["Pure: send anytime", "Slotted: send at slot start", "Vulnerability period diff", "18% vs 37% efficiency", "Synchronization requirement", "Collision recovery logic"]
     }
@@ -575,7 +875,14 @@ export const questions: Question[] = [
     question: "Hidden & Exposed terminal problem",
     answer: {
       definition: "These are challenges in wireless networks where stations can't perceive all other stations, leading to unintended collisions or inefficient channel idle time.",
-      explanation: "The Hidden Terminal problem occurs when station A and C can see B but not each other; if both send to B, they collide. This is solved using RTS/CTS (Request to Send/Clear to Send) handshakes. The Exposed Terminal problem occurs when a station B is sending to A, and station C hears B and wrongly assumes it can't send to D, even though a transmission to D wouldn't interfere with B to A. These problems highlight the limitations of simple 'carrier sensing' in environments with restricted signal range and obstacles, requiring more complex MAC-layer coordination protocols like IEEE 802.11.",
+      explanation: [
+        "Collision Blindness: The Hidden Terminal problem occurs when stations A and C can see station B but cannot detect each other's signals.",
+        "Undetectable Chaos: If A and C both send data to B simultaneously, a collision occurs at B that neither A nor C can detect directly.",
+        "Handshake Solution: This is typically solved using the RTS/CTS (Request to Send / Clear to Send) handshake to clear the area around B.",
+        "Wasted Silence: The Exposed Terminal problem happens when station B is sending to A, and station C mistakenly avoids sending to D.",
+        "False Congestion: C hears B's transmission and assumes the channel is busy, even though a transmission to D would not interfere with A.",
+        "Complexity Recognition: These problems illustrate how simple 'Carrier Sensing' (listening) is insufficient for complex wireless environments."
+      ],
       example: "Three laptops in different rooms connecting to one central router.",
       keyPoints: ["Hidden: Collision risk", "Exposed: Wasted throughput", "RTS/CTS solution", "Limited signal range issue", "Obstruction interference", "Carrier sense limitations"]
     }
@@ -587,7 +894,14 @@ export const questions: Question[] = [
     question: "Checksum and CRC steps",
     answer: {
       definition: "Checksum and CRC (Cyclic Redundancy Check) are two mathematical procedures used to detect errors in transmitted data units.",
-      explanation: "Checksum involves treating data as a sequence of integers and adding them together, often using 1's complement math; the result is sent as the checksum field. CRC treats data as a binary polynomial and performs a long division by a generator polynomial; the remainder is the CRC. CRC is significantly more complex but also much more powerful at catching 'burst' errors (multiple bit flips). Checksum is lighter on CPU resources and is commonly used in protocols like TCP/IP where speed is prioritized, while CRC is the standard for high-reliability physical and data link layer framing like Ethernet.",
+      explanation: [
+        "A Checksum is calculated by adding up all the data segments as integers using 1's complement arithmetic.",
+        "The sender appends the negative of this sum, so the total sum at the receiver's end should be zero if no error exists.",
+        "CRC (Cyclic Redundancy Check) uses binary polynomial division instead of simple addition to catch more errors.",
+        "While checksums are computationally 'light' and fast, they can be easily fooled by errors that cancel each other out.",
+        "CRC is significantly more robust, catching almost all burst errors, and is often implemented directly in network hardware.",
+        "Standard protocols use Checksums at higher layers (IP/TCP) for speed, and CRC at the Data Link layer for reliability."
+      ],
       example: "IP header checksumming (fast) vs Ethernet frame CRC checking (robust).",
       keyPoints: ["Addition vs Division logic", "Integer sum vs Polynomial math", "CPU light vs Hardware robust", "Speed vs Reliability tradeoff", "Internet layers vs Link layers", "Error detection certainty"]
     }
@@ -726,10 +1040,27 @@ export const questions: Question[] = [
     marks: 15,
     question: "Dijkstra shortest path algorithm",
     answer: {
-      definition: "Dijkstra's algorithm is a greedy, shortest-path algorithm used in networking to find the most efficient route between a source node and all other nodes in a graph with non-negative weights.",
-      explanation: "The algorithm operates by assigning temporary distance values to every node, initialized to infinity, except for the starting source node which is set to zero. It maintains two sets: visited and unvisited nodes. In each step, the algorithm selects the unvisited node with the smallest cumulative distance. For every neighbor of this selected node, it performs a 'relaxation' operation: if the path through the current node to the neighbor is shorter than the neighbor's currently stored distance, the distance is updated. Once a node is visited, its shortest path is guaranteed. This process repeats until all nodes are visited or the destination is reached. In computer networks, this algorithm allows routers to build a 'Shortest Path Tree' (SPT), identifying the optimal next-hop for every possible destination. It is the core logic behind robust Link-State routing protocols like OSPF, ensuring that data packets take the mathematically most efficient path through the network infrastructure.",
-      diagramExplanation: "A graph with weighted edges. A table showing the step-by-step evolution of [Node, Distance, Predecessor] values as the algorithm progresses.",
-      example: "A router in a corporate network calculating the fastest path to a remote server across multiple intermediate links of varying speeds.",
+      definition: "Dijkstra's algorithm is a greedy, shortest-path algorithm used in networking to find the most mathematically efficient route between a single source node and all other nodes in a network graph.",
+      explanation: [
+        "Core Foundation: Dijkstra's algorithm is the fundamental cornerstone of Link-State routing protocols like OSPF.",
+        "Mathematical Model: It treats the network as a graph where routers are nodes and physical links are edges with assigned 'weights' or 'costs'.",
+        "Router Perspective: The goal is for each router to determine the least-cost path to every other router, creating a Shortest Path Tree.",
+        "Local Optimality: The algorithm is 'greedy' because it definitively chooses the shortest known path to an unvisited node at each step.",
+        "Reliability Guarantee: This architectural process ensures that once a path is finalized, it is mathematically guaranteed to be the shortest possible.",
+        "Dynamic Adaptation: In a real-world ISP network, Dijkstra's is constantly running in the background to handle fiber cuts or hardware changes.",
+        "Precision Performance: It provides the mathematical certainty needed for high-performance networks to avoid loops and maximize throughput."
+      ],
+      detailedPoints: [
+        "Initialization: Set the source node distance to 0 and all other nodes to infinity. Mark all nodes as unvisited.",
+        "Greedy Selection: From the set of unvisited nodes, select the node with the smallest cumulative distance from the source.",
+        "Neighbor Evaluation: For the selected node, look at all its unvisited neighbors and calculate their potential distance through the current node.",
+        "Path Relaxation: If the newly calculated distance is smaller than the neighbor's current recorded distance, update the distance and set the current node as the neighbor's predecessor.",
+        "Permanence: Once all neighbors of the current node are evaluated, mark the current node as 'visited'. A visited node's shortest path is never recalculated.",
+        "Termination Logic: Repeat the selection and relaxation steps until all reachable nodes in the network are visited.",
+        "Algorithm Output: The result is a Shortest Path Tree (SPT) where the cost to reach any destination from the source is minimized."
+      ],
+      diagramExplanation: "A graph with weighted edges. A table showing the step-by-step evolution of [Node, Distance, Predecessor] values as the algorithm progresses from source S to destinations A, B, and C.",
+      example: "A router in a corporate network calculating the fastest path to a remote server across multiple intermediate links of varying speeds (10Gbps vs 1Gbps).",
       advantages: ["Guarantees shortest path", "Mathematically robust", "No routing loops", "Highly efficient for known topologies"],
       disadvantages: ["High CPU usage", "Fails with negative weights", "Requires global topology knowledge"],
       applications: ["OSPF routing", "GPS navigation", "Packet forwarding", "Traffic engineering"],
@@ -743,10 +1074,27 @@ export const questions: Question[] = [
     marks: 15,
     question: "Hierarchical routing",
     answer: {
-      definition: "Hierarchical routing is a design strategy that divides a large network into different levels or layers (like areas or autonomous systems) to manage scale and complexity.",
-      explanation: "As networks grow perfectly, the size of routing tables in every router becomes unmanageable. Hierarchical routing solves this by logically grouping routers into 'Regions' or 'Areas'. Routers within an area only need to know how to reach nodes in their own area. To send data to another area, they simply forward it to a designated 'Border Router'. This significantly reduces the size of routing tables, saves memory, and limits the amount of routing update traffic spanning the entire network. For example, OSPF uses a Backbone Area (Area 0) and multiple attached areas. Changes in one area don't trigger recalculations in others, improving stability and convergence times across the global internet. This multi-level approach allows the network to expand indefinitely without crashing routers under the weight of massive routing databases. It balances the need for global connectivity with the physical limitations of router hardware.",
-      diagramExplanation: "A map showing clusters of routers grouped into 'Area 1', 'Area 2', and 'Backbone Area'. Lines show connections within and between these groups.",
-      example: "The global internet uses BGP to route between large Autonomous Systems, while OSPF or EIGRP routes within each system.",
+      definition: "Hierarchical routing is a multi-level design strategy that divides a large network into distinct areas or clusters to ensure scalability, manage complexity, and reduce routing overhead.",
+      explanation: [
+        "Area Partitioning: Hierarchical routing is a design strategy that divides a large network into distinct areas or clusters for better scalability.",
+        "Traffic Containment: By grouping routers locally, most routing update traffic stays contained within a small neighborhood rather than flooding the site.",
+        "Strategic Summarization: Only aggregated or 'summary' information is passed up to the backbone layer, reducing total table sizes significantly.",
+        "Architectural Analogy: This organization mirrors the human postal system: mail is sent to a country, then a city, then a specific street address.",
+        "Global Scalability: Without this structural hierarchy, the global internet would collapse under the weight of its own administrative routing updates.",
+        "Boundary Management: Specialized border routers connect these areas and handle the translations between local and global routing perspectives.",
+        "Capacity Optimization: It enables millions of devices to coexist without requiring every router to maintain an impossibly massive memory database."
+      ],
+      detailedPoints: [
+        "Scalability Focus: Prevents 'Routing Table Explosion' by allowing routers to ignore the internal details of distant network sections.",
+        "Area Partitioning: Large networks are partitioned into regions (e.g., OSPF Areas). Each area maintains its own internal topology map.",
+        "Backbone Layer: High-level routers (Backbone Area 0) handle the transit of data between different areas/regions.",
+        "Border Routers: Specialized routers connect to two or more areas and handle the summarization of internal routes for the rest of the network.",
+        "Resource Efficiency: Significantly reduces the CPU and RAM required for routing calculations since each router only deals with a small subset of the total network.",
+        "Stability Enhancement: An unstable link or 'flapping' route in one area is hidden from other areas, preventing a local failure from becoming a global outage.",
+        "Autonomous Systems: At the largest scale, the internet is a hierarchy of Autonomous Systems (AS) managed by BGP protocols."
+      ],
+      diagramExplanation: "A map showing clusters of routers grouped into 'Area 1', 'Area 2', and 'Backbone Area'. Lines show connections within and between these groups. Arrows indicate summarized route flow.",
+      example: "The global internet uses BGP to route between large Autonomous Systems (like Google or Comcast), while OSPF routes within each company internally.",
       advantages: ["Reduced routing table size", "Lower CPU/RAM usage", "Improved stability", "Minimized update traffic"],
       disadvantages: ["Suboptimal routing paths possible", "Increased configuration complexity", "Harder to manage globally"],
       applications: ["Global Internet (BGP)", "OSPF Areas", "Large enterprise WANs"],
@@ -760,10 +1108,27 @@ export const questions: Question[] = [
     marks: 15,
     question: "Link state routing",
     answer: {
-      definition: "Link state routing is a dynamic routing class where every router possesses a complete map of the entire network and independently calculates the best paths.",
-      explanation: "In this method, каждый router identifies its immediate neighbors and the costs to reach them. It then creates a 'Link State Packet' (LSP) containing this information and floods it to all other routers in the network. Once all LSPs are received, every router builds an identical topology database or map. Each router then independently runs Dijkstra's algorithm on this map to find the shortest path from itself to all other nodes. This results in incredibly fast convergence and zero routing loops, as every router has a consistent and complete view of the network. Unlike distance vector, updates are only sent when a link change occurs, reducing normal bandwidth waste. However, this comes at the cost of high CPU and memory requirements to store and process the full network graph. Protocols like OSPF and IS-IS are prime examples, forming the backbone of most large modern networks.",
-      diagramExplanation: "A visual showing routers broadcasting LSPs to all peers until everyone has the same full-network map.",
-      example: "An enterprise OSPF network where a cable cut triggers an LSP update that all routers use to instantly re-calculate routes.",
+      definition: "Link State Routing is a modern, high-performance dynamic routing class where every router builds a complete, identical map of the entire network topology.",
+      explanation: [
+        "Network Map: Link state routing is like every router having its own complete 'GPS map' of the entire network topology.",
+        "Neighbor Discovery: Each router discovers its immediate neighbors and their connection costs using periodic 'Hello' packets.",
+        "Global Awareness: It then floods this discovered information to every other router in the network via Link State Advertisements (LSAs).",
+        "Synchronized Data: This 'flooding' ensures that every node in the network eventually builds a perfectly identical topology database.",
+        "Shortest Path Calculation: Once the map is complete, each router independently runs Dijkstra's algorithm to find the absolute shortest paths.",
+        "Convergence Speed: This results in extremely fast 'convergence'—when a link fails, the entire network updates its pathing in milliseconds.",
+        "Industry Standard: It is the global standard for large-scale enterprise networks due to its reliability and immunity to routing loops."
+      ],
+      detailedPoints: [
+        "Global Topology Awareness: Every router possesses a complete and identical 'Link State Database' representing the entire network structure.",
+        "Hello Protocol: Routers use periodic 'Hello' packets to discover neighbors and monitor the health of their immediate connections.",
+        "LSA Flooding: Link State Advertisements (LSAs) are reliably sent to all nodes to ensure synchronous database updates across the network.",
+        "Shortest Path Tree (SPT): Using Dijkstra's algorithm, each router calculates its own unique 'best-path' tree rooted at itself.",
+        "Fast Convergence: The network responds to topology changes almost instantly, as updates are event-triggered rather than periodic.",
+        "Loop Prevention: Because every router understands the full topology, they can logically verify paths and ignore circular routing information.",
+        "Resource Intensive: Requires significant RAM to store the topology map and CPU cycles to run complex mathematical shortest-path calculations."
+      ],
+      diagramExplanation: "A visual showing routers broadcasting Link State Packets (LSPs). A database table is shown on each router with perfectly synchronized network data.",
+      example: "An OSPF network in a large corporate office where a fiber-cut in the basement triggers an instant re-route for all upstairs departments.",
       advantages: ["Fast convergence", "No routing loops", "Event-driven updates", "Hierarchical support"],
       disadvantages: ["High CPU/Memory usage", "Complex configuration", "Initial flooding overhead"],
       applications: ["Enterprise backbones", "ISP networks", "OSPF/IS-IS protocols"],
@@ -778,7 +1143,24 @@ export const questions: Question[] = [
     question: "Dynamic routing algorithms",
     answer: {
       definition: "Dynamic routing algorithms are protocols that allow routers to automatically discover the network topology, exchange routing information, and adapt to changes in real-time.",
-      explanation: "Unlike static routing, where paths are manually entered, dynamic algorithms use software logic to determine the best paths. They are broadly categorized into Distance Vector (like RIP) and Link State (like OSPF). Distance Vector algorithms are simpler; they periodicially share tables with neighbors and use the Bellman-Ford algorithm to find paths based on 'distance' and 'direction'. Link State algorithms are more complex; they build a full map of the network and use Dijkstra's algorithm for pathfinding. Hybrid protocols like EIGRP combine features of both. These algorithms handle network growth, link failures, and congestion automatically, ensuring that traffic is always routed through the most efficient available paths. They use metrics like hop count, bandwidth, delay, and reliability to make decisions. In the modern world, dynamic routing is essential for maintaining the high availability and performance of the internet and large-scale corporate networks.",
+      explanation: [
+        "Autonomous Adaptation: Dynamic routing allows routers to automatically discover topology, exchange info, and adapt to changes in real-time.",
+        "Logic-Driven: Unlike static routing, these protocols use software logic and metrics to determine the most efficient data paths.",
+        "Neighbor Sharing: Distance Vector algorithms (like RIP) regularly share local tables with neighbors to build a directional sense of the network.",
+        "Map Building: Link State algorithms (like OSPF) build a full topological map of the entire network for precise path calculations.",
+        "Failure Resilience: These protocols handle link failures and congestion automatically, ensuring data always follows the best available route.",
+        "Optimized Hybrids: Modern systems often use hybrid approaches like EIGRP to combine the speed of Link State with the simplicity of Distance Vector.",
+        "Digital Intelligence: Dynamic routing is essential for the self-healing nature of the modern internet and large enterprise wide-area networks."
+      ],
+      detailedPoints: [
+        "Network Discovery: Routers automatically identify directly connected neighbors using periodic hello packets.",
+        "Information Exchange: Nodes share their local routing tables (Distance Vector) or link states (Link State) with peers.",
+        "Path Selection: Sophisticated algorithms like Bellman-Ford or Dijkstra calculate the best route based on specific metrics.",
+        "Convergence: The state where all routers have synchronized and consistent routing information across the network.",
+        "Metric Evaluation: Decisions are made using cost, hop count, bandwidth, load, or delay values.",
+        "Adaptive Behavior: If a link fails, the protocol automatically detects the outage and recalculates a secondary path.",
+        "Efficiency: Reduces manual administrative burden and ensures traffic always follows the most optimal digital path."
+      ],
       diagramExplanation: "A flowchart showing: Router discovery -> Table exchange -> Best path calculation -> Regular monitoring -> Adaptive recalculation.",
       example: "BGP dynamically re-routing global internet traffic around a major submarine cable failure.",
       advantages: ["Automatic recovery", "Easy to scale", "No manual maintenance", "Adapts to congestion"],
@@ -795,7 +1177,24 @@ export const questions: Question[] = [
     question: "Congestion control techniques",
     answer: {
       definition: "Congestion control refers to a set of techniques and mechanisms used at the network layer to prevent the network from becoming overloaded and collapsing.",
-      explanation: "Congestion occurs when the offered load (number of packets) exceeds the network's capacity. Techniques are divided into Open-Loop (prevention) and Closed-Loop (removal). Open-loop techniques include Retransmission policy, Window policy, Acknowledgment policy, and Discarding policy; these are implemented by design to minimize congestion. Closed-loop techniques respond to congestion in real-time and include Backpressure (choking a node), Choke Packets (notifying the source to slow down), and Load Shedding (dropping packets). Another major technique is Traffic Shaping, using Leaky Bucket or Token Bucket algorithms to regulate the data flow. Routers may also use ECN (Explicit Congestion Notification) bits in IP headers to inform hosts about nearly-full buffers. Effective congestion control ensures that the network maintains high throughput and low delay even under heavy load, preventing catastrophic failures where the entire system stops moving data due to excessive packet loss.",
+      explanation: [
+        "System Stability: Congestion control involves techniques to prevent the network from becoming overloaded and suffering a complete collapse.",
+        "Strategy Division: It is broadly divided into Open-Loop (prevention-focused) and Closed-Loop (active removal) strategies.",
+        "Prevention Focus: Open-loop policies, such as specific retransmission rules, are designed into the protocol to minimize congestion by default.",
+        "Reactive Response: Closed-loop methods respond to active congestion using mechanisms like Choke Packets to slow down the data source.",
+        "Traffic Shaping: Algorithms like Leaky Bucket or Token Bucket regulate the flow of data into the network fabric to maintain stability.",
+        "Emergency Measures: Load Shedding is a final recovery measure where routers intentionally 'drop' non-critical packets when buffers are full.",
+        "Fairness Guaranteed: Effective control ensures fair resource sharing and high throughput even when demand exceeds physical link capacity."
+      ],
+      detailedPoints: [
+        "Open-Loop Strategies: Preventive policies like specific acknowledgment rules and retransmission timers set at the protocol design phase.",
+        "Closed-Loop Feedback: Periodic monitoring that triggers active responses like sending 'Choke Packets' to slow down a source.",
+        "Traffic Shaping: Using algorithms like Leaky Bucket (constant rate) or Token Bucket (burst support) to regulate data entry.",
+        "Backpressure Logic: A hop-by-hop feedback mechanism where each node restricts the sender's rate when its own buffers are full.",
+        "Load Shedding: A final recovery measure where routers intentionally 'drop' packets (e.g., Wine or Milk policy) when overwhelmed.",
+        "Explicit Congestion Notification (ECN): Marking bits in the packet header to warn end-hosts without actually dropping data.",
+        "Throughput Monitoring: Constantly comparing the delivered data rate to the requested load to detect the 'Congestion Knee' early."
+      ],
       diagramExplanation: "A graph of offered load vs throughput, showing a peak followed by a sharp drop (congestion collapse) and a flattened line (with control).",
       example: "A router dropping low-priority ICMP packets (Load Shedding) during a period of high video streaming traffic.",
       advantages: ["Prevents network collapse", "Fair resource sharing", "Predictable performance", "Reduces packet loss"],
@@ -812,7 +1211,24 @@ export const questions: Question[] = [
     question: "IPv4 protocol and addressing",
     answer: {
       definition: "IPv4 (Internet Protocol version 4) is the primary protocol at the network layer used to provide logical addressing and packet routing across the internet.",
-      explanation: "IPv4 using a 32-bit address space, allowing for approximately 4.3 billion unique addresses. Addresses are written in dotted-decimal notation (e.g., 172.16.254.1). An IPv4 header (20-60 bytes) contains vital fields: Source/Dest IPs, TTL (Time to Live) to prevent loops, Protocol ID (identifies high layer), and Checksum for header integrity. The addressing system uses a hierarchical structure consisting of a Network ID and a Host ID, which is distinguished by a Subnet Mask. Classful addressing (A, B, C) was the original allocation method, later replaced by CIDR (Classless Inter-Domain Routing) for better efficiency. IPv4 also supports fragmentation, allowing packets to be broken down if they are too large for a specific link's MTU. Despite the address exhaustion leading to the rise of IPv6, IPv4 remains the most widely used and supported protocol on the internet today, often managed through NAT (Network Address Translation).",
+      explanation: [
+        "Scale: IPv4 uses a 32-bit address space, allowing for approximately 4.3 billion unique identifiers worldwide.",
+        "Notation: Addresses are typically represented in 'Dotted-Decimal' notation (e.g., 172.16.254.1) for human readability.",
+        "Loop Prevention: The 20-byte standard header contains vital fields like TTL (Time to Live) to prevent infinite packet loops.",
+        "Structural Hierarchy: Addressing is hierarchical, divided into a Network ID and a Host ID using a specific 'Subnet Mask'.",
+        "MTU Adaptation: It supports 'Fragmentation', allowing large packets to be divided to fit through links with smaller MTU sizes.",
+        "Addressing Efficiency: While 'Classful' addressing was used originally, modern IPv4 uses CIDR (Classless Inter-Domain Routing).",
+        "Persistent Dominance: Despite address exhaustion, IPv4 remains the dominant global standard, often extended via NAT technology."
+      ],
+      detailedPoints: [
+        "32-Bit Address Space: Provides exactly 4,294,967,296 unique logical addresses for global networking.",
+        "Dotted-Decimal Notation: Addresses are represented as four 8-bit octets separated by dots (e.g., 192.168.1.1).",
+        "Header Components: Includes fields like TTL (loop prevention), Protocol (layer 4 ID), and Header Checksum.",
+        "Net-ID and Host-ID: Logical separation of the address using a 'Subnet Mask' to identify the local network vs the device.",
+        "CIDR (Classless Inter-Domain Routing): The modern method for flexible address allocation using prefixes like /24 or /16.",
+        "Fragmentation: The ability to break large packets into smaller segments to fit the Maximum Transmission Unit (MTU) of a link.",
+        "Classful Addressing: The legacy system (Classes A, B, C, D, E) used for fixed-size network blocks before CIDR."
+      ],
       diagramExplanation: "An IP address split into four octets. The header structure showing fields: Version, IHL, Total Length, TTL, and IP addresses.",
       example: "Your computer being assigned a local IP of 192.168.1.5 to communicate with a router.",
       advantages: ["Universal adoption", "Well-understood", "Efficient processing", "Hierarchical routing"],
@@ -831,7 +1247,14 @@ export const questions: Question[] = [
     question: "IPv4 vs IPv6",
     answer: {
       definition: "IPv4 and IPv6 are the two current versions of the Internet Protocol used for identifying and routing data between devices.",
-      explanation: "IPv4 uses a 32-bit address (4.3B addresses) in decimal format, while IPv6 uses 128-bit (nearly infinite) in hexadecimal. IPv6 was designed to solve the address exhaustion of IPv4. Beyond size, IPv6 has a simplified header for faster routing, built-in IPsec security, and eliminates the need for NAT by providing enough global addresses for every device. IPv6 also supports auto-configuration (SLAAC), allowing devices to generate their own IP without a DHCP server. While IPv4 is still dominant, the world is gradually migrating to the more efficient and scalable IPv6.",
+      explanation: [
+        "Header Divergence: IPv4 uses a 32-bit address (4.3B addresses) in decimal format, while IPv6 uses a 128-bit space in hexadecimal.",
+        "Motivation: IPv6 was primarily designed to solve the imminent address exhaustion problem of the IPv4 internet.",
+        "Processing Speed: Beyond size, IPv6 features a simplified header with fewer fields, enabling faster processing by backbone routers.",
+        "Security & Flow: It includes native IPsec support for mandatory security and eliminates the need for Network Address Translation (NAT).",
+        "Auto-Config: IPv6 supports Stateless Address Autoconfiguration (SLAAC), allowing devices to join networks without a DHCP server.",
+        "Future Survival: While migration is ongoing, IPv6 is essential for the growth of IoT and the survival of the global internet."
+      ],
       example: "192.168.1.1 (v4) vs 2001:0db8:85a3:0000:0000:8a2e:0370:7334 (v6).",
       keyPoints: ["32-bit vs 128-bit addresses", "Decimal vs Hex notation", "NAT vs Global address model", "Simplified vs complex header", "Built-in security in v6", "SLAAC auto-config in v6"]
     }
@@ -843,7 +1266,14 @@ export const questions: Question[] = [
     question: "OSPF protocol",
     answer: {
       definition: "Open Shortest Path First (OSPF) is a powerful Link State routing protocol used within a single Autonomous System (AS).",
-      explanation: "OSPF uses Dijkstra's algorithm to compute the shortest path to all network nodes. Routers build a full map of the network (Link State Database) by flooding Link State Advertisements (LSAs) to their peers. It supports hierarchical routing through 'Areas', reducing table sizes. OSPF converges very quickly after a change and is highly scalable, making it the standard for most enterprise networks. It is 'open' and vendor-neutral, ensuring cross-hardware compatibility, and supports multi-path routing (ECMP) where data can take multiple equal-cost paths simultaneously.",
+      explanation: [
+        "Protocol Class: OSPF is an 'Interior' Link State routing protocol that builds a complete topological map of a local network.",
+        "Algorithm Logic: It uses Dijkstra's algorithm to compute the absolute shortest path to every router in the autonomous system.",
+        "Scalability: OSPF supports hierarchical design through 'Areas', preventing routing table 'explosion' in massive enterprises.",
+        "Reaction Time: The protocol converges extremely quickly, finding new paths in milliseconds after a physical link failure.",
+        "Interoperability: It is non-proprietary (open standard), ensuring that Cisco, Juniper, and other vendors' routers can interoperate.",
+        "Metric Precision: OSPF also supports Cost-based metrics, allowing engineers to favor high-speed fiber links over slower alternatives."
+      ],
       example: "A large university or corporate campus using OSPF to route traffic between different departments and buildings.",
       keyPoints: ["Link State protocol", "Dijkstra's Algorithm", "Area 0 (Backbone) logic", "Fast convergence speed", "LSA flooding mechanism", "Vendor-neutral standard"]
     }
@@ -855,7 +1285,14 @@ export const questions: Question[] = [
     question: "BGP protocol",
     answer: {
       definition: "Border Gateway Protocol (BGP) is the 'glue' of the internet, a path-vector protocol used to exchange routing information between different Autonomous Systems (AS).",
-      explanation: "BGP is responsible for routing data across the entire global internet. Unlike interior protocols, BGP focuses on policy and stability rather than just the shortest path. It maintains a table of IP prefixes and the sequence of AS numbers (the AS_PATH) to each destination. By looking at the path, it easily detects and prevents routing loops at the global level. BGP is highly configurable, allowing ISPs to set complex rules for traffic flow based on commercial and security agreements. It is extremely robust and handles the routing of trillions of daily global packets.",
+      explanation: [
+        "Global Glue: BGP is the 'Glue' of the internet, responsible for routing data across the massive global web of diverse providers.",
+        "Logic Method: It is a Path-Vector protocol, meaning it tracks the sequence of Autonomous Systems (AS) a packet must cross.",
+        "Decision Tiers: BGP prioritizes stability and administrative policy over simply finding the shortest geographical distance.",
+        "Path Guard: By analyzing the AS_PATH, BGP naturally detects and prevents infinite routing loops at the scale of continents.",
+        "Transit Policy: ISPs use BGP to implement complex business agreements, favoring certain transit partners over more expensive ones.",
+        "Massive Scale: It is designed to be incredibly robust, handling the dynamic routing of the entire world's digital traffic daily."
+      ],
       example: "An Indian ISP using BGP to determine whether to send US-bound traffic via a cable in the Suez Canal or across the Pacific.",
       keyPoints: ["Inter-AS routing", "Path-vector based", "Internet backbone glue", "AS_PATH loop prevention", "Policy-driven routing", "TCP port 179 used"]
     }
@@ -867,7 +1304,14 @@ export const questions: Question[] = [
     question: "Unicast vs multicast vs anycast",
     answer: {
       definition: "These are the three primary types of addressing schemes that determine how many receivers get a data packet.",
-      explanation: "Unicast is one-to-one; data is sent from a single source to a single, specific destination. Multicast is one-to-many; data is sent to a group of interested host. Anycast is one-to-nearest; data is sent to a group of nodes, but only the node physically or logically closest to the sender receives it. Unicast is for standard browsing; Multicast is for IPTV or streaming to a group; Anycast is used by DNS and CDNs to provide low latency by connecting users to the nearest server. These schemes optimize bandwidth and performance for different service types.",
+      explanation: [
+        "One-to-One: Unicast is the standard 1-to-1 communication, where a packet is addressed to one specific host on the network.",
+        "One-to-Many: Multicast is 1-to-many, where one stream is delivered only to a specific group of interested receivers (IGMP).",
+        "One-to-Nearest: Anycast is 1-to-nearest, where a packet is delivered to the single node in a group that is physically or logically closest.",
+        "Resource Optimization: Multicast is essential for efficient IPTV and massive software updates, as it avoids clogging the entire network bandwidth.",
+        "Latency Reduction: Anycast is the backbone of DNS and CDNs, ensuring users connect to the nearest regional server for ultra-low latency.",
+        "Versatile Delivery: Together, these schemes allow network engineers to optimize data delivery for everything from private chat to global streaming."
+      ],
       example: "Opening a private file (Unicast), Watching a live stream (Multicast), DNS resolution (Anycast).",
       keyPoints: ["One-to-one (Unicast)", "One-to-many (Multicast)", "One-to-nearest (Anycast)", "DNS use of Anycast", "IPTV use of Multicast", "Standard web use of Unicast"]
     }
@@ -879,7 +1323,14 @@ export const questions: Question[] = [
     question: "Token bucket vs leaky bucket",
     answer: {
       definition: "These are two traffic shaping algorithms used to regulate the rate of data entering a network.",
-      explanation: "The Leaky Bucket algorithm enforces a rigid, constant-rate output stream, regardless of how bursty the input is; its hole size defines the speed. The Token Bucket algorithm allows for controlled 'burstiness'. Data can only be sent if 'tokens' are available in the bucket; during idle times, tokens accumulate, allowing a large burst of data to be sent later. Token bucket is much more popular in modern QoS because it allows applications to utilize full speed for short periods (like loading a web page) while still protecting the overall network stability.",
+      explanation: [
+        "Fixed Output: The Leaky Bucket algorithm enforces a strict, constant-rate output, smoothing out even the most extreme traffic surges.",
+        "Funnel Analogy: It is like a funnel: no matter how much water you pour in at once, it only drips out at a fixed, predictable speed.",
+        "Burst Support: The Token Bucket algorithm is more flexible, allowing for 'Bursts' of traffic when the network has idle capacity.",
+        "Earning Credit: In Token Bucket, tokens are gathered in a bucket at a fixed rate; each packet sent 'costs' one token to process.",
+        "Immediate Processing: If the bucket is full, a large amount of data can be sent at full speed immediately, supporting modern web behavior.",
+        "QoS Integration: Most modern routers use Token Bucket for QoS because it balances overall network safety with high-performance peaks."
+      ],
       example: "Leaky bucket is like a steady drip; Token bucket is like a credit card with a monthly limit and carry-over.",
       keyPoints: ["Steady rate vs Burst support", "Traffic shaping logic", "Leaky: Discards on overflow", "Token: Collects for later", "Modern QoS standard", "Network stability focus"]
     }
@@ -891,7 +1342,14 @@ export const questions: Question[] = [
     question: "Admission control & load shedding",
     answer: {
       definition: "These are two 'Closed-Loop' congestion control strategies used when the network is reaching its capacity.",
-      explanation: "Admission Control is a preventive measure where the network refuses to accept new connections if it doesn't have enough resources to guarantee their quality. Load Shedding is a drastic recovery measure where routers simply start 'shedding' (dropping) existing packets when overloaded. In Load Shedding, 'Gentle' dropping prioritizes dropping low-priority packets, while 'Wine' dropping drops old packets assuming new ones are more relevant. Admission control prevents congestion before it starts, while load shedding is the final wall of defense against total system failure.",
+      explanation: [
+        "Entrance Guarding: Admission Control is a preventive strategy where a network 'rejects' new connection requests if its resources are full.",
+        "Quality Maintenance: By saying 'No' to new users, the network ensures that the quality for existing users remains high and stable.",
+        "Active Disposal: Load Shedding is a desperate, reactive strategy where routers 'shed' (drop) packets that are already in the system.",
+        "Intelligent Dropping: Modern routers use 'Intelligent Shedding', dropping non-critical packets (like pings) before touching mission-critical data.",
+        "Data Relevance: In some protocols, 'Wine' shedding drops older packets, assuming newer data is more relevant to the receiver.",
+        "Collapse Defense: These methods prevent the 'Congestion Collapse' where the network spends all its energy on overhead and zero on actual data."
+      ],
       example: "A phone network saying 'Lines Busy' (Admission Control) or a router dropping ICMP packets (Load Shedding).",
       keyPoints: ["Preventive vs Reactive", "Connection rejection", "Packet dropping logic", "QoS prioritization", "Resource reservation", "Final defense mechanism"]
     }
@@ -903,7 +1361,14 @@ export const questions: Question[] = [
     question: "Link state phases",
     answer: {
       definition: "The operation of a Link State routing protocol generally proceeds through five distinct phases to achieve network convergence.",
-      explanation: "1. Neighbor Discovery: Routers send 'Hellos' to find peers. 2. Link Cost Measurement: Routers determine the cost (delay/bandwidth) to each neighbor. 3. LSP Construction: Building a packet with local link info. 4. LSP Flooding: Sharing this packet with every other router in the network. 5. Shortest Path Calculation: Each router runs Dijkstra's algorithm on the collected map to build its routing table. These phases ensure that every node moves from local awareness to global network visibility, enabling efficient routing.",
+      explanation: [
+        "Discovery: Phase 1 - Neighbor Discovery: Routers send 'Hello' packets to find out who is directly connected to them.",
+        "Costing: Phase 2 - Metric Calculation: The router measures bandwidth, delay, or reliability to each discovered neighbor.",
+        "LSP Creation: Phase 3 - LSP Construction: A Link-State Packet (LSP) is built, containing the router's identity and its neighbor costs.",
+        "Propagation: Phase 4 - Global Flooding: This LSP is reliably broadcast to EVERY router in the entire network or area.",
+        "Optimization: Phase 5 - Dijkstra's Run: Every router takes the synchronized map and calculates the absolute shortest paths for its table.",
+        "Convergence: This sequence ensures that every node moves from local awareness to a perfect, global understanding of the network."
+      ],
       example: "The sequence of events when an OSPF router is powered on and joins a network.",
       keyPoints: ["Discovery and Hellos", "Metric calculation", "Link State Packets (LSP)", "Global flooding", "Shortest Path Tree (SPT)", "Dijkstra's final run"]
     }
@@ -1042,10 +1507,27 @@ export const questions: Question[] = [
     marks: 15,
     question: "TCP three-way handshake",
     answer: {
-      definition: "The TCP three-way handshake is a rigorous process used to establish a reliable connection between a client and a server on a TCP/IP network before data transfer starts.",
-      explanation: "To ensure both hosts are ready and their sequence numbers are synchronized, TCP uses three steps. First, the client sends a SYN (Synchronize) packet with a random Initial Sequence Number (ISN). Second, the server responds with a SYN-ACK packet, acknowledging the client's SYN and sending its own ISN. Third, the client sends back an ACK packet to acknowledge the server's SYN. At this point, the connection is considered 'ESTABLISHED'. This process prevents old, delayed packets from accidentally opening a connection and ensures that both sides have agreed on the starting point for their byte-stream tracking. It allocates necessary buffer space and resources for the session. Without this handshake, reliable, stateful communication would be impossible in the chaotic, lossy environment of internet routing. It serves as the foundation for almost every reliable internet service, from simple websites to complex financial transactions.",
-      diagramExplanation: "A sequence chart: 1. SYN (seq=X) -> Server, 2. SYN-ACK (seq=Y, ack=X+1) -> Client, 3. ACK (ack=Y+1) -> Server.",
-      example: "A web browser opening a connection to 'google.com' immediately after the DNS lookup is complete.",
+      definition: "The TCP three-way handshake is a rigorous, multi-step synchronization process used to establish a reliable, connection-oriented session between two hosts before actual data transfer begins.",
+      explanation: [
+        "Connection Logic: TCP is a connection-oriented protocol that must establish a 'virtual circuit' before any data transfer can occur.",
+        "System Calibration: The three-way handshake is the rigorous process used to build this circuit and calibrate the two end-systems.",
+        "Sequence Sync: It synchronizes the starting sequence numbers (ISNs), which are critical for byte-level data tracking throughout the session.",
+        "Capability Check: The process allows both hosts to agree on communication parameters like the Maximum Segment Size (MSS).",
+        "Ghost Detection: By requiring three distinct steps, it provides a definitive guard against 'ghost connections' from old, delayed packets.",
+        "Reliability Base: This handshake turns a stateless best-effort IP network into a stateful, reliable communication pipe for applications.",
+        "Universal Standard: It is the mandatory foundation for all reliable internet traffic, including web browsing, secure shell, and file transfers."
+      ],
+      detailedPoints: [
+        "Step 1 (SYN): The client sends a packet with the SYN (Synchronize) flag set. It includes its random Initial Sequence Number (X) and connection options.",
+        "Server Resource Allocation: Upon receiving the SYN, the server allocates internal buffer space and timers for the pending connection.",
+        "Step 2 (SYN-ACK): The server responds with a packet having both SYN and ACK flags set. It acknowledges the client (ack=X+1) and sends its own random sequence number (Y).",
+        "Step 3 (ACK): The client receives the server's response and sends a final ACK packet (ack=Y+1). It may also include the first few bytes of application data here.",
+        "Connection Status: Once the third packet is sent/received, both sides move to the 'ESTABLISHED' state, and full-speed, full-duplex data transfer begins.",
+        "Security Note: The random nature of the sequence numbers (ISNs) is critical to prevent 'TCP Sequence Prediction' attacks where attackers inject fake data into a session.",
+        "Failure Handling: If a SYN is sent to a closed port, the server responds with an RST (Reset); if the server is down, the client's handshake timer will eventually expire."
+      ],
+      diagramExplanation: "A sequential chart: 1. SYN (seq=X) -> Server, 2. SYN-ACK (seq=Y, ack=X+1) -> Client, 3. ACK (ack=Y+1) -> Server. Shows transition from LISTEN to ESTABLISHED.",
+      example: "Your web browser connecting to a server (like google.com) immediately after your PC resolves the server's IP address via DNS.",
       advantages: ["Reliable sync", "Prevents duplicate connections", "Resource allocation", "Negotiates parameters"],
       disadvantages: ["Added latency (RTT)", "Vulnerable to SYN flooding", "Handshake overhead"],
       applications: ["Web browsing (HTTP)", "FTP file transfer", "Email (SMTP)"],
@@ -1059,10 +1541,27 @@ export const questions: Question[] = [
     marks: 15,
     question: "TCP congestion control",
     answer: {
-      definition: "TCP congestion control is a suite of algorithms used to regulate the data transmission rate to prevent the network from becoming overloaded.",
-      explanation: "The process follows several phases. 'Slow Start' begins with a small congestion window (cwnd) that doubles for every ACK received, showing exponential growth until reaching a 'Threshold'. Then, 'Congestion Avoidance' takes over, increasing the window linearly to probe the network's limit safely. If a timeout occurs, it signals severe congestion; TCP halves the threshold and resets the window to 1, starting over. If 'Triple Duplicate ACKs' are received, it signals a single lost packet rather than a full network collapse; TCP performs 'Fast Retransmit' of the lost packet and 'Fast Recovery' (halving the window instead of dropping to 1). This AIMD (Additive Increase Multiplicative Decrease) logic ensures that TCP uses all available bandwidth while being extremely cautious about overloading shared internet links. It is the core reason the internet remains stable despite billions of devices sending bursty traffic simultaneously.",
-      diagramExplanation: "A graph showing cwnd size over time: Exponential increase, linear increase, and sharp drops during loss events.",
-      example: "A file download starting slow, then hitting full speed, and occasionally dipping if your home WiFi becomes crowded.",
+      definition: "TCP congestion control is a suite of AI-like algorithms (AIMD) that allow a sender to intelligently probe the network's capacity and adjust its speed to prevent throughput collapse.",
+      explanation: [
+        "Intelligent Throttling: TCP congestion control is a suite of intelligent algorithms designed to adjust transmission speeds based on network health.",
+        "Feedback Loop: It interprets the acknowledgment of packets as 'green lights' to speed up and lost packets as 'stop signs' to slow down.",
+        "Rapid Discovery: The 'Slow Start' phase exponentially increases the speed to rapidly discover the network's initial available capacity.",
+        "Cautious Search: 'Congestion Avoidance' switches to a safe, linear search for the absolute maximum speed once a threshold is reached.",
+        "Severe Back-off: The protocol uses the Multiplicative Decrease principle to back off significantly when severe congestion (packet loss) is detected.",
+        "Efficiency Retention: Advanced features like Fast Recovery allow TCP to maintain high throughput even if individual packets are lost.",
+        "Global Stability: This collective behavior of billions of connections ensures the global internet remains stable and fair for all users."
+      ],
+      detailedPoints: [
+        "Congestion Window (cwnd): This is the heart of the algorithm. It is a value that tells the sender how many segments it can have 'un-acknowledged' in the network.",
+        "Slow Start Logic: cwnd starts at 1 segment and doubles every Round Trip Time (RTT). This continues until cwnd reaches the 'Threshold' (ssthresh).",
+        "Congestion Avoidance: Once past ssthresh, cwnd increases by just one segment per RTT, cautiously searching for the absolute maximum capacity of the link.",
+        "Timeout Response: If a segment times out, it means severe congestion. TCP sets ssthresh to half the current speed and resets cwnd to 1, restarting Slow Start.",
+        "Fast Retransmit: If 3 duplicate ACKs are received, the sender assumes only ONE segment was lost. It immediately resends that segment without waiting for the timer.",
+        "Fast Recovery: Instead of dropping back to 1 after a 3-dup ACK, TCP halves the window and stays in Congestion Avoidance, maintaining much higher throughput.",
+        "AIMD Principle: Additive Increase (go slow) and Multiplicative Decrease (back off big). This ensures the network stays in a stable, well-balanced state."
+      ],
+      diagramExplanation: "A sawtooth graph plotting Window Size vs Time. Shows the exponential climb of Slow Start followed by the linear 'search' of Avoidance and the sharp vertical drops at loss.",
+      example: "Watching a YouTube video where the quality starts low and then 'jumps up' to 4K once the TCP connection confirms your speed is high enough.",
       advantages: ["Fair resource sharing", "Prevents network collapse", "Self-regulating logic", "Dyanmic speed"],
       disadvantages: ["Slow initial ramp-up", "Poor for high-loss wireless", "Treats loss as congestion"],
       applications: ["All reliable web traffic", "Streaming downloads", "File sync"],
@@ -1077,7 +1576,15 @@ export const questions: Question[] = [
     question: "TCP header format",
     answer: {
       definition: "The TCP header is a 20-60 byte data structure added to every transport layer segment to manage reliable, stateful of communication.",
-      explanation: "Key fields in the header include: Source and Destination Ports (16 bits) to identify applications. Sequence Number (32 bits) and Acknowledgment Number (32 bits) for tracking bytes and ensuring reliability. The 'Flags' field (6 bits) includes SYN, ACK, FIN, RST, PSH, and URG, which control the connection state. The Window Size (16 bits) is used for flow control, telling the sender how much data can be received. A Checksum (16 bits) ensures the integrity of the entire segment. Options can include Maximum Segment Size (MSS) and Window Scaling. Unlike the much simpler 8-byte UDP header, the TCP header provides all the information needed for error recovery, flow control, and connection management. It allows TCP to turn the 'best-effort' IP layer into a reliable pipe. This overhead is what provides the 'Transmission Control' in TCP, making it the most used transport protocol for applications that cannot afford to lose even a single bit.",
+      explanation: [
+        "Reliability Shell: The TCP header is a structured 20-60 byte prefix added to transport segments to manage the complexities of reliability.",
+        "Process ID: It includes 16-bit Source and Destination ports that identify exactly which local applications are communicating.",
+        "Byte Tracking: 32-bit Sequence and Acknowledgment numbers allow TCP to track every byte and ensure data arrives in the perfect order.",
+        "Binary Signals: The Control Flags field (SYN, ACK, FIN, etc.) provides the binary signaling required to manage the connection state.",
+        "Flow Adjustment: Flow control is achieved via the Window Size field, which notifies the sender of the receiver's current buffer capacity.",
+        "Mathematical Check: A mandatory Checksum field provides the mathematical integrity check needed to detect multi-bit data corruption in transit.",
+        "Pipe Transformation: This comprehensive design enables TCP to transform any 'best-effort' physical path into a guaranteed, reliable digital pipe."
+      ],
       diagramExplanation: "A 32-bit wide grid mapping fields: Ports, SeqNum, AckNum, Header Length, Flags, Window, Checksum, and Options.",
       example: "Every packet of this web page you are reading contains a TCP header that ensures the text arrives in the correct order.",
       advantages: ["Highly reliable", "Dynamic flow control", "Universal compatibility", "Error-proof"],
@@ -1094,7 +1601,15 @@ export const questions: Question[] = [
     question: "Connection establishment & release",
     answer: {
       definition: "Connection management in TCP involves a strict synchronization process to start (handshake) and stop (teardown) a reliable session.",
-      explanation: "Establishment uses the 3-way handshake: Client sends SYN, Server sends SYN-ACK, Client sends ACK. This ensures both sides are ready and syncs initial sequence numbers. Connection Release is more complex and typically uses a 4-way handshake to ensure a 'graceful' shutdown. One side sends a FIN (Finish) packet, indicating it is done sending. The other side responds with an ACK and may continue to send its remaining data. Once finished, the second side also sends a FIN, which is acknowledged by the first side. This 'half-close' state allows for reliable completion of data transfer in both directions. Alternatively, a 'Hard Reset' (RST) can be used for immediate, non-graceful termination. Proper management prevents 'ghost' connections from wasting server resources and ensures that every byte sent is eventually accounted for and confirmed by the receiver. It provides the stateful 'connection' in what is otherwise a stateless network of independent packets.",
+      explanation: [
+        "Three-Way Sync: Connection establishment uses the 3-way handshake to ensure both sides are ready and in sync.",
+        "Tracking Base: The process syncs Initial Sequence Numbers (ISNs) which are vital for tracking the subsequent byte stream.",
+        "Graceful Exit: Connection release is typically a 4-way handshake designed to ensure a graceful and complete shutdown.",
+        "Half-Closed State: One side sends a FIN packet, and the other acknowledges it, moving into a 'half-closed' communication state.",
+        "Residual Delivery: This allows the receiver to finish sending any remaining data before performing its own final closure.",
+        "Emergency Stop: A 'Hard Reset' (RST) can be used as a failsafe to immediately terminate a resource-wasting connection.",
+        "State Integrity: Proper teardown prevents 'ghost' connections and ensures all transmitted bytes are confirmed by the receiver."
+      ],
       diagramExplanation: "A sequence diagram showing: SYN -> SYN/ACK -> ACK (Open) followed by FIN -> ACK -> FIN -> ACK (Close).",
       example: "Opening a browser tab to shop (Establishment) and closing it after the transaction is confirmed (Release).",
       advantages: ["Graceful data completion", "Resource efficiency", "Reliable state tracking", "Prevents duplicate errors"],
@@ -1111,7 +1626,15 @@ export const questions: Question[] = [
     question: "TCP protocol overview",
     answer: {
       definition: "TCP (Transmission Control Protocol) is a connection-oriented, reliable, and byte-stream oriented transport layer protocol that forms the backbone of the internet.",
-      explanation: "TCP provides a reliable service by ensuring that data arrives in order, without errors, and without duplication. It achieves this through sequence numbers, acknowledgements, and retransmissions. It is connection-oriented, requiring a handshake before any's data is sent. TCP handles 'flow control' using sliding windows to prevent overwhelming the receiver, and 'congestion control' to protect the entire network. It treats data as an unstructured stream of bytes, meaning it doesn't preserve message boundaries, unlike UDP. It is full-duplex, allowing simultaneous communication in both directions. TCP is used for most internet traffic including the web (HTTP), email (SMTP), and remote access (SSH). While it introduces latency due to its thorough reliability checks, it is the absolute standard for any task where data integrity is the top priority. Its complexity is the price paid for turning a lossy, best-effort network into a perfectly reliable communication channel.",
+      explanation: [
+        "In-Order Sync: TCP provides a reliable service by ensuring data arrives in order, without errors and duplicates.",
+        "Tracking logic: It achieves absolute reliability through the use of sequence numbers, acknowledgements, and retransmissions.",
+        "Handshake Base: The protocol is connection-oriented, requiring a rigorous handshake before any application data is sent.",
+        "Receiver Guard: TCP handles 'flow control' using sliding windows to prevent a fast sender from overwhelming the receiver.",
+        "Network Shield: It protects the entire network using 'congestion control' algorithms that react to packet loss signal.",
+        "Byte Abstraction: Data is treated as an unstructured byte-stream, meaning it doesn't preserve application-level message boundaries.",
+        "Full Duplex: It is a full-duplex protocol, allowing simultaneous, high-speed communication in both directions between hosts."
+      ],
       diagramExplanation: "A block diagram showing: Application Data -> TCP (Segmenting/Seq) -> IP (Routing) -> Physical Medium.",
       example: "A bank transaction where every bit must be perfectly accurate to prevent financial loss.",
       advantages: ["Perfect reliability", "Flow and Congestion control", "Ordered delivery", "Ubiquitous support"],
@@ -1130,7 +1653,14 @@ export const questions: Question[] = [
     question: "UDP protocol",
     answer: {
       definition: "User Datagram Protocol (UDP) is a lightweight, connectionless transport layer protocol that prioritizes speed and efficiency over absolute reliability.",
-      explanation: "UDP does not perform handshakes or track the state of a connection. It sends 'datagrams' as-is, with no guarantee of arrival, order, or duplication control. Its header is only 8 bytes, compared to TCP's 20 bytes. This makes it extremely fast with very low overhead. UDP is ideal for real-time applications like DNS, VoIP, online gaming, and video streaming where losing a few packets is better than waiting for retransmissions. It effectively provides a direct interface to the underlying IP layer with the simple addition of port numbers for application multiplexing and a basic checksum for optional integrity.",
+      explanation: [
+        "Handshake Free: UDP is a 'Lightweight' transport protocol that minimizes overhead by eliminating the handshake process.",
+        "Unconfirmed Stream: It is connectionless, meaning it sends datagrams immediately without verifying if the receiver is ready.",
+        "Header Efficiency: With an 8-byte header, it is much faster and requires less processing power than the 20-byte TCP header.",
+        "Maximum Speed: UDP does not provide flow control or congestion control, allowing it to send data at the application's full speed.",
+        "Real-Time Focus: It is ideal for real-time services like DNS and online gaming, where speed is more critical than a few lost bits.",
+        "Minimal Logic: The protocol acts as a simple wrapper around IP, adding only port multiplexing and optional checksums."
+      ],
       example: "A voice call on WhatsApp where a tiny glitch is ignored for the sake of real-time talk speed.",
       keyPoints: ["Connectionless (no handshake)", "Unreliable (best effort)", "Low overhead (8-byte header)", "High speed focus", "DNS and VoIP usage", "No congestion control logic"]
     }
@@ -1142,7 +1672,14 @@ export const questions: Question[] = [
     question: "RTP protocol",
     answer: {
       definition: "Real-time Transport Protocol (RTP) is a network protocol designed for delivering audio and video data over IP networks in real-time.",
-      explanation: "RTP typically runs on top of UDP to take advantage of its speed. While UDP provides no timing, RTP adds a timestamp and sequence number to every packet. This allows the receiver to reassemble the media in the correct order and play it back at the right time, minimizing jitter. RTP works alongside RTCP (RTP Control Protocol), which sends feedback about the quality of the stream. It is the industry standard for VoIP, video conferencing, and live internet broadcasting, focusing on maintaining the 'flow' and 'timing' required for human perception of audio and video.",
+      explanation: [
+        "Streaming Standard: RTP is the industry standard for delivering live audio and video over unstable packet-switched networks.",
+        "Playback Sync: Crucially, RTP adds a 'Timestamp' to every packet, which allows the receiver to play back media at the correct speed.",
+        "Error Resilience: It also uses 'Sequence Numbers' to detect lost packets and reorder segments that arrived out of sequence.",
+        "UDP Foundation: RTP usually runs on top of UDP to prioritize the real-time 'flow' over the slow reliability of TCP.",
+        "Quality Metrics: It is paired with RTCP (RTP Control Protocol), which provides feedback on the network's current quality and jitter.",
+        "Communication Engine: RTP is the foundational engine for modern communication tools like Zoom, Microsoft Teams, and WebRTC."
+      ],
       example: "A Zoom or Microsoft Teams meeting where RTP handles the actual video stream delivery.",
       keyPoints: ["Real-time media delivery", "Builds on top of UDP", "Timestamps for playback", "Sequence numbers for order", "Pairs with RTCP feedback", "VoIP and Streaming standard"]
     }
@@ -1154,7 +1691,14 @@ export const questions: Question[] = [
     question: "Sliding window in TCP",
     answer: {
       definition: "The sliding window mechanism in TCP is used for efficient flow control, allowing the sender to transmit multiple segments before waiting for an acknowledgment.",
-      explanation: "The window size is advertised by the receiver in every ACK, telling the sender how much buffer space it has available. The sender can send bytes up to this window limit. As ACKs return, the window 'slides' forward, allowing new data to be sent. This 'pipelining' ensures the link is kept busy, vastly improving speeds compared to stop-and-wait. If the receiver's application is slow, it reduces the advertised window to 'zero', temporarily stopping the sender. It effectively balances the transmission rate with the receiver's processing capacity at any given moment.",
+      explanation: [
+        "Pipelined Transmission: The Sliding Window is TCP's primary mechanism for 'Pipelining' and high-performance flow control.",
+        "Buffer Advertising: The receiver 'Advertises' its currently available buffer space in every ACK packet sent back to the source.",
+        "Safe Boundaries: The sender is allowed to transmit as many bytes as can 'fit' within this advertised window before stopping.",
+        "Dynamic Movement: As acknowledgments return, the window 'slides' forward, allowing the next set of bytes to enter the network pipe.",
+        "Speed Balance: This balances the data flow, ensuring a powerful server doesn't drown a slower receiver in too much data.",
+        "Wait-Time Reduction: It effectively eliminates the massive 'wait time' that plagues simpler stop-and-wait communication protocols."
+      ],
       example: "Downloading a 1GB file where the speed adjusts based on your PC's CPU and memory availability.",
       keyPoints: ["Receiver-based flow control", "Advertised window size", "Pipelined transmission", "Buffer safety mechanism", "Zero window flow stop", "Dynamic speed adjustment"]
     }
@@ -1166,7 +1710,14 @@ export const questions: Question[] = [
     question: "Flow control in transport layer",
     answer: {
       definition: "Flow control at the transport layer is an end-to-end mechanism that synchronizes the sender's speed with the receiver's processing and buffer capacity.",
-      explanation: "Unlike link-layer flow control which handles a single wire, transport layer control works between the source and final destination across many routers. TCP uses a 'Sliding Window' combined with 'Window Advertisements' in the segment header. The receiver constantly communicates its free buffer space. This prevents buffer overflow at the destination host, which would cause packet loss. It is essential in a heterogeneous internet where a multi-gigabit server might be sending data to a slow smartphone on a weak cellular signal.",
+      explanation: [
+        "End-to-End Scope: Flow control at the transport layer is an end-to-end concept, unlike link-layer control which is hop-by-hop.",
+        "Buffer Protection: It is designed to protect the final destination's application buffers from being completely overwhelmed.",
+        "Ad Feedback: TCP uses the 'Advertised Window' field in the header to inform the sender of the receiver's dynamic capacity.",
+        "Heterogeneous Scaling: This mechanism allows a 10Gbps server to communicate safely with a 1Mbps smartphone without data loss.",
+        "Adaptive Throttling: If the receiver's application is busy, it shrinks the window, effectively 'throttling' the incoming data stream.",
+        "Stability Pillar: Without this critical synchronization, high-speed networks would suffer constant packet drops and retransmissions."
+      ],
       example: "A high-speed server slowing down because your phone is struggling to process a complex 4K video stream.",
       keyPoints: ["End-to-end synchronization", "Prevents destination overflow", "Sliding window mechanism", "Advertised window field", "Heterogeneous speed balance", "Application processing guard"]
     }
@@ -1178,7 +1729,14 @@ export const questions: Question[] = [
     question: "RPC concept",
     answer: {
       definition: "Remote Procedure Call (RPC) is a protocol that allows a computer program to cause a subroutine or procedure to execute in another address space (typically on another computer) as if it were a local call.",
-      explanation: "RPC hides the complexities of the network from the developer. Behind the scenes, the system uses 'Stubs'. The 'Client Stub' packs (marshals) the arguments into a message and sends it to the server. The 'Server Stub' unpacks (unmarshals) them, calls the local function, and sends the result back. This makes building distributed systems much easier, as the programmer doesn't have to manually write socket code every time. It is the foundation for modern 'Microservices' and cloud computing where many servers work together as a single system.",
+      explanation: [
+        "Network Abstraction: RPC abstracts the network, allowing a developer to call functions on a remote server as if they were local functions.",
+        "Stub Processing: It uses 'Stubs' to handle the complexity: the client stub 'Marshals' (packs) arguments into a standard network packet.",
+        "Server Logic: The server stub 'Unmarshals' (unpacks) the packet, executes the procedure, and sends the result back in a message.",
+        "Business Focus: This allows the programmer to focus on 'What' is happening rather than 'How' the raw bits are sent over the wire.",
+        "Binary Speed: Modern RPC systems like gRPC use efficient binary serialization to provide ultra-fast inter-server calls.",
+        "Architectural Pattern: It is the fundamental architectural pattern behind cloud computing, microservices, and distributed databases."
+      ],
       example: "Your phone app calling a server function to 'process_payment' without knowing the server's internal socket logic.",
       keyPoints: ["Transparent remote execution", "Client and Server Stubs", "Marshalling/Unmarshalling", "Hides networking complexity", "Cloud and Microservices foundation", "Local call abstraction"]
     }
@@ -1190,7 +1748,14 @@ export const questions: Question[] = [
     question: "Timer management in TCP",
     answer: {
       definition: "TCP uses several timers to ensure reliability and handle connection states in the presence of unpredictable network delays and failures.",
-      explanation: "The most important is the Retransmission Timer, which waits for an ACK and triggers a resend if it expires. This timer is dynamic, calculated using the Round Trip Time (RTT). Other timers include the Persistence Timer (checking if a zero-window has opened), the Keepalive Timer (checking if a quiet peer is still alive), and the TIME_WAIT timer (ensuring a closed connection doesn't interfere with new ones). Effective timer management is what allows TCP to be robust enough for the internet, where a packet might take 10ms or 500ms to arrive depending on the route.",
+      explanation: [
+        "Retransmission Guard: The Retransmission Timer is the most critical; it waits for an ACK and triggers a resend if it expires.",
+        "Dynamic RTT: This timer is 'Adaptive', meaning it constantly adjusts itself based on the measured Round Trip Time (RTT).",
+        "Deadlock Prevention: The Persistence Timer prevents deadlocks by periodically checking if a peer's zero-window has finally opened.",
+        "Silence Monitor: A Keepalive Timer is used to check if a connection is still active during long periods of silence.",
+        "Closure Safety: The TIME_WAIT timer ensures that a closed connection's stray packets don't interfere with new, identical ones.",
+        "Internet Proof: Efficient management of these timers is what allows TCP to remain robust across the unpredictable global internet."
+      ],
       example: "TCP waiting 200ms for an ACK before assuming the packet was lost and resending it.",
       keyPoints: ["Retransmission timeout (RTO)", "Dynamic RTT estimation", "Persistence zero-window timer", "Keepalive idle check", "TIME_WAIT closure safety", "Robustness mechanism"]
     }
@@ -1202,7 +1767,14 @@ export const questions: Question[] = [
     question: "TCP vs UDP",
     answer: {
       definition: "TCP and UDP are the two primary transport layer protocols, representing a trade-off between absolute reliability and pure speed.",
-      explanation: "TCP is connection-oriented, reliable, and uses flow/congestion control, making it heavy but error-proof. UDP is connectionless, best-effort, and has minimal overhead, making it light and extremely fast. TCP guarantees the order of data; UDP does not. TCP is used for apps that can't lose data (Web, Email, Banking). UDP is used for apps that can't afford delay (Streaming, Gaming, VoIP). TCP is a 'Heavyweight' protocol with a 20-byte header, while UDP is a 'Lightweight' protocol with an 8-byte header. Choose TCP when accuracy is everything; choose UDP when real-time speed is everything.",
+      explanation: [
+        "State Difference: TCP is connection-oriented and reliable, while UDP is connectionless and 'best-effort' (unreliable).",
+        "Throttling Logic: TCP uses rigorous flow and congestion control to protect the network; UDP sends data at full speed without checks.",
+        "In-Order Delivery: TCP guarantees that data arrives in the perfect order; UDP datagrams can arrive in any order or not at all.",
+        "Header Weight: The TCP header is 20-60 bytes (heavyweight), whereas the UDP header is a tiny 8 bytes (lightweight).",
+        "Optimal Use-Case: TCP is used where data integrity is vital (Web, Banking, Email); UDP is for real-time speed (VoIP, Gaming).",
+        "Design Choice: Choose TCP for accuracy and delivery guarantees; choose UDP when low latency is the highest priority."
+      ],
       example: "Downloading an App (TCP) vs Playing an Online Game (UDP).",
       keyPoints: ["Reliable vs Unreliable", "Connection-oriented vs Less", "High vs Low overhead", "Ordered vs Any-order", "Web/File vs Stream/DNS use", "Heavy vs Light header"]
     }
@@ -1321,10 +1893,27 @@ export const questions: Question[] = [
     marks: 15,
     question: "WWW architecture",
     answer: {
-      definition: "The World Wide Web (WWW) is a global information system that allows documents and web resources to be shared and accessed over the internet using URLs and the HTTP protocol.",
-      explanation: "The architecture of the WWW is built on a distributed client-server model. The key components include Web Browsers (the clients), Web Servers, and the Hypertext Transfer Protocol (HTTP). When a user enters a URL, the browser sends an HTTP request to the server hosting that address. The server processes the request and sends back an HTTP response, typically containing HTML, CSS, and JavaScript. This system relies on three pillars: Uniform Resource Locators (URLs) for unique addressing, Hypertext Markup Language (HTML) for content structure, and HTTP for communication. Modern web architecture has expanded to include Content Delivery Networks (CDNs) for faster global access, Web Caches to reduce server load, and dynamic backends like databases and APIs. This creates a seamless, interactive experience where users can navigate between trillions of linked resources with a single click. It is the most dominant application of the internet, transforming how humanity accesses information, conducts business, and interacts socially.",
-      diagramExplanation: "A flowchart: User -> Browser -> DNS Lookup -> HTTP Request -> Web Server -> File Retrieval -> HTTP Response -> Browser Rendering.",
-      example: "Browsing an online store like Amazon where the browser requests product pages from Amazon's global server network.",
+      definition: "The World Wide Web (WWW) is a massive, distributed information system built on the internet that uses the Hypertext Transfer Protocol (HTTP) to share linked documents and resources.",
+      explanation: [
+        "Distributed Model: The architecture of the WWW is a masterpiece of distributed computing, based on a flexible Client-Server model.",
+        "Collective Scale: It consists of a collection of billions of servers serving trillions of resources to users worldwide.",
+        "Resource Pipeline: The browser (client) makes a specific request for a resource, and the web server provides the answer.",
+        "Standard Languages: This relationship is governed by HTTP/HTTPS, the standardized 'languages' of the global web.",
+        "Intermediate Layers: To ensure speed, the architecture includes intermediate layers like CDNs to distribute files geographically.",
+        "Separation of Concerns: The architecture separates content (HTML), presentation (CSS), and behavior (JS) for maximum development flexibility.",
+        "Information Hub: It is the most dominant application of the internet, transforming how humanity interacts with all information."
+      ],
+      detailedPoints: [
+        "Client-Server Model: The web operates on requests from browsers (Clients) to servers (Hosts) that process and deliver the asked-for resources.",
+        "Uniform Resource Locators (URLs): Every single document, image, or video on the web has a unique 'address' that can be linked to from anywhere else.",
+        "Hypertext Linking: The fundamental principle of the web is 'Hypertext'—the ability to jump from one document to another via clickable links, creating a web of data.",
+        "HTTP/HTTPS Protocols: The standardized 'languages' used for communication. HTTPS adds a layer of encryption (SSL/TLS) for secure transactions.",
+        "Resource Representation: Servers provide data in structured formats like HTML (structure), CSS (styling), and JavaScript (interaction) for browser rendering.",
+        "Browser Engines: Specialized software inside the client that translates raw code into the visual, interactive interface that humans can use.",
+        "Distributed Scalability: The system is decentralized; no single entity owns the web, and new servers can be added indefinitely without reconfiguring the global system."
+      ],
+      diagramExplanation: "A flowchart showing: User Input -> Browser -> DNS Lookup -> HTTP Get Request -> Web Server -> File Retrieval -> HTTP Response -> Browser Parsing -> Visual Rendering.",
+      example: "Browsing a global e-commerce site like Amazon, where your browser connects to local CDN servers to load images and text quickly.",
       advantages: ["Global reach", "Searchable information", "Cross-platform compatibility", "Low barrier to entry"],
       disadvantages: ["Security risks (XSS, Phishing)", "Privacy concerns", "Information overload", "Reliant on internet access"],
       applications: ["E-commerce", "Online education", "Social media", "News portals"],
@@ -1339,7 +1928,15 @@ export const questions: Question[] = [
     question: "Email architecture",
     answer: {
       definition: "Email architecture is the system of servers, protocols, and clients that enable the asynchronous exchange of digital messages over the global internet.",
-      explanation: "The email system consists of several core components: User Agents (UA), Message Transfer Agents (MTA), and Message Access Agents (MAA). When a user sends an email, their UA (like Outlook) sends the message to their local MTA (Mail Server) using the SMTP (Simple Mail Transfer Protocol). The sender's MTA looked up the receiver's destination using DNS (MX records) and forwards the message to the receiver's MTA. The receiver's MTA stores the message in the user's mailbox. Finally, the receiver uses their UA to retrieve the message from the server using MAA protocols like POP3 or IMAP. This 'Store-and-Forward' architecture allows messages to be delivered even if the receiver is offline. It separates the heavy lifting of routing and delivery from the client interface. Modern email also includes complex spam filtering, encryption (TLS/SSL), and webmail interfaces, making it the most critical tool for professional and personal formal communication worldwide.",
+      explanation: [
+        "System Agents: Email architecture involves User Agents (UA), Message Transfer Agents (MTA), and Message Access Agents (MAA).",
+        "Local Submission: The User Agent (e.g., Outlook) sends a message to the local Mail Server (MTA) using the SMTP protocol.",
+        "Address Discovery: The sender's MTA performs a DNS MX record lookup to find the physical address of the receiver's mail server.",
+        "Mailbox Relay: The message is then relayed to the receiver's MTA, where it is deposited into a specific digital mailbox.",
+        "Flexible Retrieval: The receiver retrieves the message at their convenience using retrieval protocols like POP3 or IMAP.",
+        "Delayed Communication: This 'Store-and-Forward' design ensures that communication succeeds even if the parties are not online at the same time.",
+        "Security Layers: Modern systems add layers of spam filtering and encryption (TLS/SSL) to protect the integrity of professional communication."
+      ],
       diagramExplanation: "A visual path: Sender -> UA -> SMTP -> Sender MTA -> SMTP -> Receiver MTA -> Mailbox -> POP/IMAP -> Receiver UA.",
       example: "Sending a work report from your company Gmail account to a client's Outlook account.",
       advantages: ["Asynchronous delivery", "Cheap and fast", "Supports attachments", "Global industry standard"],
@@ -1355,10 +1952,27 @@ export const questions: Question[] = [
     marks: 15,
     question: "DNS working",
     answer: {
-      definition: "The Domain Name System (DNS) is the hierarchical and decentralized naming system used to translate human-readable domain names (like google.com) into IP addresses.",
-      explanation: "DNS functions as the 'phonebook' of the internet. When you type a URL, your computer first checks its local cache. If not found, it sends a query to a Recursive Resolver (typically provided by your ISP). The resolver then queries the DNS hierarchy in stages: first the Root Servers (identifying the TLD), then the Top-Level Domain (TLD) servers (like .com or .org), and finally the Authoritative Name Servers for the specific domain. Each stage provides the IP of the next level until the resolver gets the final destination IP address. This result is then cached by the resolver and your computer for future use (controlled by the TTL value). DNS uses UDP port 53 for fast queries but can switch to TCP for large data transfers. This distributed design ensures that no single server has to handle all global internet naming traffic, providing massive scalability and resilience. Without DNS, users would have to remember complex numeric IP addresses for every website they access.",
-      diagramExplanation: "A circular query path: Browser -> Local Resolver -> Root -> TLD -> Authoritative Server -> IP found -> Browser.",
-      example: "Typing 'wikipedia.org' and having DNS find the IP address 208.80.154.224 in less than 50 milliseconds.",
+      definition: "The Domain Name System (DNS) is the global, hierarchical, and highly decentralized database that translates human-readable domain names into specialized numeric IP addresses.",
+      explanation: [
+        "Dynamic Translation: DNS is a global, hierarchical, and decentralized database that translates domain names into numeric IP addresses.",
+        "Internet Phonebook: It acts as the 'phonebook' of the internet, converting names like 'google.com' into IPs like '172.217.1.1'.",
+        "Scaling Hierarchy: The hierarchical structure partitions the global namespace, preventing any single database from being overwhelmed.",
+        "Query Path: A user request travels through recursive resolvers and authoritative name servers to find the final record.",
+        "Response Speed: Aggressive caching at multiple network levels ensures that most queries take less than 100 milliseconds to resolve.",
+        "Metadata Management: DNS also manages critical metadata, such as MX records for email routing and SRV records for specific services.",
+        "Navigability: It is a vital foundation of the modern internet, enabling humans to navigate the web using easy-to-remember words."
+      ],
+      detailedPoints: [
+        "Hierarchical Structure: DNS is organized in a tree: Root (.) -> Top-Level Domains (.com, .org) -> Second-Level Domains (google) -> Subdomains (mail).",
+        "Recursive Resolvers: These are servers (usually at your ISP) that do the 'hunting' for you, querying different servers until the final IP is found.",
+        "Root Name Servers: The first stop in a query. They direct the resolver to the specific server responsible for a TLD like '.com'.",
+        "TLD Servers: Managed by organizations like Verisign, these servers point to the 'Authoritative Name Server' for a specific domain name.",
+        "Authoritative Name Servers: The final source of truth. These servers hold the actual IP address for the domain you are looking for.",
+        "A and AAAA records: The basic records that map names to IPv4 and IPv6 addresses respectively.",
+        "TTL (Time to Live) & Caching: To save time, every result is 'cached' (remembered) for a specific number of seconds so the same lookup isn't repeated immediately."
+      ],
+      diagramExplanation: "A circular query path: Browser -> Recursive Resolver -> Root Server -> TLD Server -> Authoritative Server -> Resolver -> Browser Cache.",
+      example: "Typing 'wikipedia.org' and having DNS find the IP address 208.80.154.224 in the blink of an eye.",
       advantages: ["User-friendly naming", "Hierarchical scalability", "Redundancy and resilience", "Global standard"],
       disadvantages: ["DNS Spoofing/Poisoning", "Privacy leaks", "Latency for first-time queries"],
       applications: ["Web browsing", "Email routing (MX)", "Load balancing", "Service discovery"],
@@ -1373,7 +1987,15 @@ export const questions: Question[] = [
     question: "FTP protocol",
     answer: {
       definition: "File Transfer Protocol (FTP) is a standard network protocol used for the efficient transfer of files between a client and a server on a computer network.",
-      explanation: "FTP is unique because it uses two separate TCP connections: a Control Connection (Port 21) for commands and status, and a Data Connection (Port 20) for the actual file transfer. When a client connects, it establishes the control connection to send login info and file commands. For the data transfer, it uses either 'Active Mode' (server connects to client) or 'Passive Mode' (client connects to server). Passive mode is preferred today as it works better with firewalls. FTP supports both binary and ASCII modes and provides basic authentication. While the original FTP is insecure as it sends passwords in plain text, variations like SFTP (SSH-based) or FTPS (SSL-based) provide the necessary encryption for modern use. Despite being an old protocol, FTP remains one of the most efficient ways to move large amounts of data, manage website files on remote servers, and perform bulk backups between servers in a data center.",
+      explanation: [
+        "Dual Channels: FTP is unique because it uses two separate TCP connections to manage the transfer of files.",
+        "Command Pipeline: The Control Connection uses Port 21 for sending commands and status updates between client and server.",
+        "Bitstream Pipeline: The Data Connection uses Port 20 for the actual, high-speed transfer of file bitstreams.",
+        "Firewall Adaptation: It supports both 'Active Mode' and 'Passive Mode' to work around various networking firewall restrictions.",
+        "Transfer Modes: FTP can transfer data in both ASCII mode (for text files) and Binary mode (for images and software).",
+        "Encrypted Variants: While original FTP is insecure, variations like SFTP and FTPS provide the necessary encryption for modern use.",
+        "Bulk Efficiency: It remains a critical tool for web publishing, server backups, and moving large amounts of bulk data efficiently."
+      ],
       diagramExplanation: "A two-line connection diagram: Port 21 (Commands) and Port 20 (Data) between Client and Server.",
       example: "A web developer uploading new website code to a hosting server using an FTP client like FileZilla.",
       advantages: ["Very fast file transfers", "Supports large files", "Resume capability", "Directional control"],
@@ -1390,7 +2012,15 @@ export const questions: Question[] = [
     question: "Email message format",
     answer: {
       definition: "The email message format (defined by RFC 5322) is the standard structure for digital messages, consisting of an envelope, a header section, and a message body.",
-      explanation: "The 'Envelope' is used by the mail server (MTA) for routing and isn't seen by the user. The 'Header' section contains key-value pairs like From, To, Subject, and Date. Headers also include technical info like 'Received' stamps used for tracking message paths and 'Message-ID' for unique identification. The 'Body' contains the actual text. Originally, email was limited to plain 7-bit ASCII text. To support non-English characters, images, and attachments, the MIME (Multipurpose Internet Mail Extensions) standard was added. MIME allows the body to have multiple parts with different content types (like HTML and plain text) and provides encoding for binary files. This standardized format ensures that an email sent from a smartphone in Japan can be perfectly read by a desktop computer in Brazil. It serves as the universal legal and professional structure for digital communication, ensuring cross-platform stability and long-term archivability.",
+      explanation: [
+        "Structural Layers: The email message format consists of a hidden Envelope, a visible Header, and the Message Body.",
+        "Internal Envelope: The Envelope is used strictly by the Mail Servers (MTAs) for routing and delivering the message.",
+        "Visible Metadata: The Header section contains key metadata such as From, To, Subject, and unique Message-ID markers.",
+        "Server Trail: Headers also include a trail of 'Received' stamps that document the physical servers the message traversed.",
+        "Rich Media: The MIME standard allows email to include rich media, such as high-resolution images and PDF attachments.",
+        "Alternative Views: MIME can also provide 'Multipart' messages, allowing the same email to contain both plain text and HTML versions.",
+        "Global Reliability: This standardized format ensures that messages can be reliably exchanged between any two global email providers."
+      ],
       diagramExplanation: "A hierarchical breakdown: [Envelope] -> [Header (To, From, Sub)] -> [Body (MIME sections)].",
       example: "An email containing a PDF attachment and a formatted HTML message body with embedded images.",
       advantages: ["Universal compatibility", "Supports rich media (MIME)", "Structured headers", "Searchable/Archivable"],
@@ -1409,7 +2039,15 @@ export const questions: Question[] = [
     question: "HTTP protocol",
     answer: {
       definition: "Hypertext Transfer Protocol (HTTP) is the foundational application layer protocol of the World Wide Web, used for transmitting hypermedia documents.",
-      explanation: "HTTP follows a request-response model where a client (browser) requests a resource and a server responds with it. It is inherently 'stateless', meaning each request is independent; 'cookies' are used to manage user sessions. Commands like GET (retrieve), POST (send data), and DELETE manage resources. HTTP/1.1 introduced persistent connections, while HTTP/2 and HTTP/3 have brought major performance boosts like multiplexing and faster encryption. It is the core language of the web, enabling everything from simple news reading to complex banking and social interactions.",
+      explanation: [
+        "Web Foundation: HTTP is the foundational request-response protocol that powers the entire World Wide Web experience.",
+        "Client Intent: A client (browser) sends a request for a specific resource, such as a webpage or high-resolution image.",
+        "Server Action: The server processes this request and responds with the data or an appropriate error status code.",
+        "Independent Requests: It is inherently 'stateless', meaning every request is independent of any previous interaction with the site.",
+        "Session Persistence: Modern websites use 'Cookies' to add a layer of persistent session state to the stateless HTTP protocol.",
+        "Interaction Verbs: Standard commands like GET, POST, and PUT are used to interact with resources on the remote server.",
+        "Performance Leap: Evolutions like HTTP/3 use the QUIC protocol to provide vastly superior speeds and security over older versions."
+      ],
       example: "Your browser sending a 'GET /home.html' request to a server after you click a link.",
       keyPoints: ["Request-Response model", "Stateless protocol", "GET, POST, DELETE methods", "TCP Port 80 / 443", "Cookie-based state", "Web foundation"]
     }
@@ -1421,7 +2059,14 @@ export const questions: Question[] = [
     question: "URL structure",
     answer: {
       definition: "A Uniform Resource Locator (URL) is the global address for any web resource, containing all the information needed to locate and access it.",
-      explanation: "A URL consists of several parts: The Protocol (http://), the Domain Name (example.com), the Port (optional, e.g., :80), the Path (/users/home), the Query String (?id=123), and the Fragment (#top). Together, these tell the browser exactly which server to talk to, which specific file to ask for, and what extra parameters to provide. It is a human-readable way to access the deep, technical infrastructure of the internet.",
+      explanation: [
+        "Ruleset: The Protocol (http://) defines the set of rules the browser uses to talk to the server (e.g., secure HTTPS).",
+        "Logical Host: The Domain Name (example.com) identifies the physical or logical server hosting the desired resource.",
+        "Process Marker: An optional Port Number (:80 or :443) specifies the exact process on the server to connect with.",
+        "File Identifier: The Path (/users/profile) tells the server which specific directory or file the user is requesting.",
+        "Dynamic Input: Query Parameters (?id=123) allow the client to pass extra dynamic information to the server's scripts.",
+        "Internal Bookmark: The Fragment (#top) identifies a specific location within the page for the browser to scroll to immediately."
+      ],
       example: "https://www.netacademy.com/modules/module5?q=1#answer",
       keyPoints: ["Protocol (Scheme)", "Domain/Host name", "Port number", "Path to resource", "Query parameters", "Fragment identifier"]
     }
@@ -1433,7 +2078,14 @@ export const questions: Question[] = [
     question: "DNS hierarchy",
     answer: {
       definition: "The Domain Name System (DNS) is organized as a distributed, inverted tree-like hierarchy to ensure global scalability.",
-      explanation: "At the top is the 'Root' (represented by a dot), followed by 'Top-Level Domains' (TLDs) like .com, .edu, and country-codes like .in. Below these are 'Second-Level Domains' (like google.com), and finally 'Subdomains' (like mail.google.com). Responsibility is delegated at each level: Root servers know where TLD servers are; TLD servers know where authoritative servers for example.com are. This hierarchical system prevents any single server from being overwhelmed by global naming requests.",
+      explanation: [
+        "Tree Base: The DNS hierarchy is structured as an inverted tree, starting with the invisible 'Root' represented by a dot.",
+        "Global Split: Top-Level Domains (TLDs) like .com, .org, and .in form the first layer of global categorization.",
+        "Entity Identity: Second-Level Domains (like google.com) represent specific organizations or businesses within a TLD.",
+        "Service Partition: Subdomains (like mail.google.com) allow organizations to further partition their internal network services.",
+        "Information Flow: Authority is delegated down the tree: Root servers know the TLD servers, which in turn know the local servers.",
+        "Decentralized Design: This distributed approach ensures that no single server is responsible for the entire world's naming data."
+      ],
       example: "The path from root (.) to TLD (.com) to Domain (google) to Subdomain (mail).",
       keyPoints: ["Inverted tree structure", "Root server layer", "TLD (.com, .org) layer", "Authoritative servers", "Delegation of authority", "Hierarchical lookups"]
     }
@@ -1445,7 +2097,14 @@ export const questions: Question[] = [
     question: "Web servers",
     answer: {
       definition: "A web server is software (and the hardware it runs on) that stores, processes, and delivers web content to clients using the HTTP protocol.",
-      explanation: "Its primary job is to sit and wait for incoming HTTP requests. When one arrives, it searches its storage for requested files (HTML, images, etc.) or passes the request to a dynamic backend like a Python or Node.js script. It then packages the result and sends it back to the browser. Common web server software includes Apache, Nginx, and Microsoft IIS. They also provide security, manage concurrent users, and can act as 'load balancers' to spread traffic across multiple physical machines.",
+      explanation: [
+        "Service Unit: A web server is a high-performance software application that listens for and fulfills HTTP requests from browsers.",
+        "Static Delivery: Its primary function is to serve static content like HTML, CSS, and images directly from its disk storage.",
+        "Backend Gateway: In modern setups, it often acts as a 'Reverse Proxy', passing complex requests to specialized backend scripts.",
+        "Concurrent Handling: Popular servers like Nginx and Apache are designed to handle thousands of concurrent connections efficiently.",
+        "Security Tasks: They also manage critical tasks like SSL/TLS encryption, compression, and request logging for security.",
+        "Redundancy Setup: High-traffic sites use many web servers behind a 'Load Balancer' to ensure the platform never goes offline."
+      ],
       example: "Nginx serving thousands of simultaneous requests for a popular news website's homepage.",
       keyPoints: ["Stores/delivers web files", "HTTP/HTTPS communication", "Apache/Nginx/IIS types", "Static vs Dynamic content", "TCP Port 80/443 listener", "Resource management"]
     }
@@ -1457,7 +2116,14 @@ export const questions: Question[] = [
     question: "Email flow",
     answer: {
       definition: "Email flow describes the sequence of steps a digital message takes from the sender's device to the receiver's inbox across multiple servers.",
-      explanation: "First, the sender's app (UA) sends the mail to their server (MTA) using SMTP. The sender's MTA looked up the receiver's MX record in DNS to find their server. It then forwards the message via SMTP to the receiver's MTA. The receiver's MTA performs security checks and places it in the user's mailbox. Finally, the receiver retrieves it using their app via POP3 or IMAP. This journey usually happens in seconds but can involve multiple intermediate relays, ensuring global reachability.",
+      explanation: [
+        "Step 1: The User Agent (UA) uses the SMTP protocol to send the email to its local Message Transfer Agent (MTA).",
+        "Step 2: The sender's MTA queries DNS for the receiver's 'MX record' to find the IP of their mail server.",
+        "Step 3: The message is relayed via SMTP across the internet to the receiver's MTA (mail server).",
+        "Step 4: The receiver's server performs security/spam checks and places the message in the user's local mailbox.",
+        "Step 5: The receiver uses a retrieval protocol (POP3 or IMAP) to pull the message into their own User Agent.",
+        "This 'Store-and-Forward' cycle ensures that messages are delivered even if the user is currently offline."
+      ],
       example: "A Gmail message travelling through Google's relays to an Outlook inbox.",
       keyPoints: ["UA to MTA (SMTP)", "DNS MX record lookup", "MTA to MTA relay (SMTP)", "Storage in Mailbox", "Retrieval (POP/IMAP)", "Asynchronous flow"]
     }
@@ -1469,7 +2135,14 @@ export const questions: Question[] = [
     question: "DNS resource records",
     answer: {
       definition: "DNS resource records (RRs) are the individual entries in a DNS database that define different types of information for a domain name.",
-      explanation: "The most common are: A records (maps domain to IPv4), AAAA (maps to IPv6), CNAME (maps one domain to another alias), MX (identifies email servers), and NS (names authoritative servers). Other records like TXT are used for verification (like SPF for email security). These distinct record types allow a single domain name to point to multiple different services like a website, an email server, and a cloud-based verification service simultaneously.",
+      explanation: [
+        "A Records: The most basic entry, mapping a human-readable domain name to a numeric IPv4 address.",
+        "AAAA Records: The modern equivalent of A records, mapping domain names to the newer 128-bit IPv6 addresses.",
+        "CNAME Records: Used for Aliasing, allowing multiple names (like www.site.com) to point to one primary domain.",
+        "MX Records: Mail Exchanger records that specify exactly which servers are authorized to receive email for a domain.",
+        "NS Records: Identify the 'Authoritative Name Servers' that hold the master database for that specific domain.",
+        "TXT Records: Used for various metadata, including security verification services and proving domain ownership."
+      ],
       example: "An MX record telling the world that 'mail.google.com' handles mail for '@google.com'.",
       keyPoints: ["A/AAAA IP mapping", "CNAME domain aliases", "MX for email routing", "NS for authoritative info", "TXT for security/metadata", "TTL for cache control"]
     }
@@ -1481,7 +2154,14 @@ export const questions: Question[] = [
     question: "POP vs IMAP",
     answer: {
       definition: "POP and IMAP are the two primary protocols used by email clients to retrieve messages from a mail server.",
-      explanation: "POP (Post Office Protocol) is designed to download emails to a single device and then delete them from the server; it's simple but poor for multiple devices. IMAP (Internet Message Access Protocol) syncs emails across all devices; messages stay on the server, and changes (like marking as read or deleting) are updated everywhere instantly. Most modern users prefer IMAP because it allows their phone, laptop, and tablet to show exactly the same state of their mailbox.",
+      explanation: [
+        "POP (Post Office Protocol) is a 'Download-and-Delete' service designed for an era of single-computer use.",
+        "In POP, once an email is downloaded to your PC, it is removed from the server, making it inaccessible elsewhere.",
+        "IMAP (Internet Message Access Protocol) is a 'Synchronization' service designed for the multi-device world.",
+        "With IMAP, your emails live on the server; changes made on one device are instantly reflected on all others.",
+        "IMAP allows for 'Partial Fetches', meaning you can see the Subject line without downloading a massive attachment.",
+        "In today's landscape, IMAP is the undisputed standard as users demand seamless access from phones and laptops."
+      ],
       example: "Accessing your mail on both a phone and a laptop using IMAP Sync.",
       keyPoints: ["POP: Download and delete", "IMAP: Multi-device sync", "IMAP: Server-side storage", "POP: Best for single device", "IMAP: Modern industry standard", "IMAP: Faster partial fetches"]
     }

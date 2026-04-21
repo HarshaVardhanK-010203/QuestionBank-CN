@@ -231,22 +231,66 @@ function QuestionCard({
                   </section>
 
                   {/* Explanation */}
-                  {question.answer.explanation && (
+                  {(question.answer.explanation || question.answer.detailedPoints) && (
                     <section>
-                      <h4 className="text-sm font-bold uppercase tracking-wider text-indigo-500 mb-3">Explanation</h4>
+                      <h4 className="text-sm font-bold uppercase tracking-wider text-indigo-500 mb-3">Detailed Explanation</h4>
                       <div className="p-5 rounded-2xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800">
-                        <p className="text-neutral-600 dark:text-neutral-400 leading-loose text-sm">
-                          {question.answer.explanation}
-                        </p>
+                        {question.answer.explanation && (
+                          <div className="text-neutral-600 dark:text-neutral-400 text-sm mb-4">
+                            {Array.isArray(question.answer.explanation) ? (
+                              <ul className="space-y-4">
+                                {question.answer.explanation.map((point, idx) => {
+                                  const parts = point.split(': ');
+                                  return (
+                                    <li key={idx} className="flex gap-3">
+                                      <span className="shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2" />
+                                      <p className="leading-relaxed">
+                                        {parts.length > 1 ? (
+                                          <>
+                                            <span className="font-bold text-neutral-800 dark:text-neutral-200">{parts[0]}:</span> {parts.slice(1).join(': ')}
+                                          </>
+                                        ) : point}
+                                      </p>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            ) : (
+                              <p className="leading-loose">{question.answer.explanation}</p>
+                            )}
+                          </div>
+                        )}
+                        {question.answer.detailedPoints && (
+                          <ul className="space-y-3">
+                            {question.answer.detailedPoints.map((point, index) => {
+                              const parts = point.split(': ');
+                              return (
+                                <li key={index} className="flex gap-3 text-sm text-neutral-600 dark:text-neutral-400">
+                                  <span className="shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5" />
+                                  <span>
+                                    {parts.length > 1 ? (
+                                      <>
+                                        <span className="font-bold text-neutral-800 dark:text-neutral-200">{parts[0]}:</span> {parts.slice(1).join(': ')}
+                                      </>
+                                    ) : point}
+                                  </span>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        )}
                       </div>
                     </section>
                   )}
 
-                  {/* Diagram Description */}
+                  {/* Diagram Section */}
                   {question.answer.diagramExplanation && (
-                    <section className="border-l-4 border-indigo-200 dark:border-indigo-900 pl-6 py-2">
-                      <h4 className="text-xs font-bold uppercase text-neutral-400 mb-2">Diagram Overview</h4>
-                      <p className="text-sm text-neutral-500 italic">
+                    <section className="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-100 dark:border-neutral-800">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">Diagram Visualization Guide</h4>
+                      </div>
+                      <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed italic border-l-2 border-indigo-500 pl-4">
                         {question.answer.diagramExplanation}
                       </p>
                     </section>

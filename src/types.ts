@@ -6,7 +6,8 @@ export interface Question {
   question: string;
   answer: {
     definition: string;
-    explanation?: string;
+    explanation?: string | string[];
+    detailedPoints?: string[];
     diagramExplanation?: string;
     example?: string;
     advantages?: string[];
